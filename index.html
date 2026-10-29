@@ -89,6 +89,7 @@ main .wrap{padding-block:26px 56px}
 .kcorr{white-space:nowrap}
 .salvando{font-size:.75rem;font-weight:700;color:#D9C4A3;opacity:.85;animation:pisca 1s ease-in-out infinite}.salvando[hidden]{display:none}@keyframes pisca{50%{opacity:.4}}
 .cxl{font-size:.62em;font-weight:800;margin-right:3px;opacity:.75;letter-spacing:.04em}
+.rcimv{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:color-mix(in oklab,var(--line) 35%,transparent)}.rccod{font-family:var(--f-mono);font-size:.78rem;font-weight:700;color:var(--brass)}.rcaviso{margin:2px 0 0;padding:10px 12px;border-radius:10px;border-left:3px solid #c1652f;background:color-mix(in oklab,#c1652f 12%,transparent);font-size:.84rem;line-height:1.4}.motdica{margin:-6px 0 0}
 .motres{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
 .mr{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;line-height:1.25}
 .mr input{margin-top:2px;accent-color:#C1652F}.mr small{display:block;font-size:.72rem;color:var(--muted);margin-top:2px}
@@ -280,7 +281,7 @@ main .wrap{padding-block:26px 56px}
 .btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;cursor:pointer;min-height:36px;font-weight:500;white-space:nowrap;text-decoration:none;color:var(--fg);display:inline-flex;align-items:center;justify-content:center;gap:5px}
 .btn:hover{border-color:var(--muted)}
 .btn.pri{background:var(--acc);color:var(--acc-fg);border-color:var(--acc)}.btn.pri:hover{filter:brightness(1.08)}
-.btn.brass{background:var(--brass);border-color:var(--brass);color:#fff}
+.btn.brass{background:#b4561f;border-color:#b4561f;color:#fff;font-weight:700;box-shadow:0 1px 0 rgba(0,0,0,.25)}.btn.brass:hover{background:#c1652f;border-color:#c1652f}
 .btn.sm{padding:5px 9px;min-height:30px;font-size:.82rem}
 .btn.ghost{border-color:transparent;background:none;color:var(--muted)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
@@ -652,10 +653,16 @@ function vista(m,fin){if(!m)return null;if(m.finalidade===fin)return m;const o=m
   if(o&&o.finalidade===fin)return {...m,status:"disponivel",statusObs:"",arquivado:false,baixa:null,anuncioBaixaEm:null,prevEntrega:null,dataAnuncio:null,valor:null,...o,finalidade:fin,_sec:true};return null}
 // Aviso automático ao condomínio (Google Apps Script da Park Sul). Vazio = desligado.
 const LIBERACAO={url:"api",token:""};
-const MOTIVOS_RES=[["visita","Visita ao imóvel","o condomínio é avisado por e-mail"],["proprietario","Devolver ao proprietário",""],["inquilino","Entregar ao inquilino",""],["outro","Outro motivo",""]];
-const motivoHtml=pre=>`<div class="f"><span>Para que é a reserva? *</span><div class="motres" role="radiogroup">${MOTIVOS_RES.map(([k,v,d])=>`<label class="mr"><input type="radio" name="${pre}_mot" value="${k}"><span><b>${v}</b>${d?`<small>${d}</small>`:""}</span></label>`).join("")}</div></div>`;
-const motivoSel=pre=>document.querySelector(`input[name="${pre}_mot"]:checked`)?.value||"";
-const motivoTxt=k=>(MOTIVOS_RES.find(x=>x[0]===k)||[])[1]||"";
+const MOTIVOS_RES=[["visita","Visitar o imóvel","O condomínio recebe o aviso da visita por e-mail, automaticamente."],["proprietario","Devolver a chave ao proprietário",""],["inquilino","Entregar a chave ao inquilino",""],["outro","Outro motivo",""]];
+const motivoHtml=pre=>`<label class="f">Qual é a finalidade da reserva? *<select class="sel motsel" id="${pre}_mot" data-pre="${pre}"><option value="">Selecione…</option>${MOTIVOS_RES.map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select></label>
+  <p class="note motdica" id="${pre}_motdica" hidden></p>
+  <label class="f" id="${pre}_motoutL" hidden>Descreva a finalidade *<input class="inp" id="${pre}_motout" placeholder="Ex.: vistoria de entrada, medição para reforma"></label>`;
+document.addEventListener("change",e=>{const t=e.target;if(!t.classList?.contains("motsel"))return;const pre=t.dataset.pre,k=t.value;const d=(MOTIVOS_RES.find(x=>x[0]===k)||[])[2]||"";
+  const dc=document.getElementById(pre+"_motdica");dc.textContent=d;dc.hidden=!d;const ol=document.getElementById(pre+"_motoutL");ol.hidden=k!=="outro";if(k==="outro")document.getElementById(pre+"_motout").focus()});
+const motivoSel=pre=>document.getElementById(pre+"_mot")?.value||"";
+// lê a finalidade: devolve {k,desc} ou {erro}
+const motivoLer=pre=>{const k=motivoSel(pre);if(!k)return {erro:"Selecione a finalidade da reserva."};const desc=k==="outro"?frase(document.getElementById(pre+"_motout").value):"";if(k==="outro"&&!desc)return {erro:"Descreva a finalidade da reserva."};return {k,desc}};
+const motivoTxt=(k,desc)=>k==="outro"&&desc?desc:((MOTIVOS_RES.find(x=>x[0]===k)||[])[1]||"");
 async function avisarCondominio(id,m,who,para,obs){
   if(!m)return;
   const reg=d=>logEv("aviso_condominio",{...evImv(id,m),corretor:who,detalhe:d});
@@ -922,7 +929,7 @@ function renderLista(fin,p,listId,countId,rotuloFin){
     const temChave=["chave","senha","cartao","chave_senha","parceiro"].includes(m.acesso);
     const rv=!r&&m.reserva?m.reserva:null;
     const corr=(r?`<span class="chcom">Chave com</span>${quemHtml(r.corretor,r.vinculo)}`
-      :rv?`<span class="resv">Reservada</span>${quemHtml(rv.corretor,rv.vinculo)}<small class="acc">${rv.motivo&&rv.motivo!=="visita"?esc(motivoTxt(rv.motivo))+" · ":""}${esc(dt(rv.para))}${new Date(rv.para)<Date.now()-2*36e5?' · <span class="late">não retirou</span>':""}</small>`
+      :rv?`<span class="resv">Reservada</span>${quemHtml(rv.corretor,rv.vinculo)}<small class="acc">${rv.motivo&&rv.motivo!=="visita"?esc(motivoTxt(rv.motivo,rv.motivoDesc))+" · ":""}${esc(dt(rv.para))}${new Date(rv.para)<Date.now()-2*36e5?' · <span class="late">não retirou</span>':""}</small>`
       :temChave?"":`<span class="acc">${esc(ACESSO[m.acesso]||"—")}</span>`)
       +`<div class="kbtns">${chaveBtns(id,m)}</div>`;
     const dts=iso=>{if(!iso)return"—";const d=new Date(iso);return isNaN(d)?"—":fmtDS.format(d).replace(",","")};
@@ -1401,11 +1408,11 @@ function retiradaDialog(id,preset){
         const para=inputToISO(dia+"T"+hora);
         if(!para){$("#rErr").textContent="Informe a data e o horário da retirada.";return}
         if(new Date(para)<Date.now()-5*6e4){$("#rErr").textContent="A reserva precisa ser para uma data e horário futuros.";return}
-        const motivo=motivoSel("r");if(!motivo){$("#rErr").textContent="Informe para que é a reserva.";return}
+        const mo=motivoLer("r");if(mo.erro){$("#rErr").textContent=mo.erro;return}const motivo=mo.k;
         $("#rOk").disabled=true;
         try{const obs=frase($("#r_resobs").value);
-          await db.doc("imoveis/"+id).update({reserva:{corretor:who,vinculo,para,obs,motivo,criadaEm:nowISO(),por:S.uid||"",porNome:S.sessao?.nome||""},atualizadoEm:nowISO()});
-          logEv("reserva",{...evImv(id,m),corretor:who,detalhe:motivoTxt(motivo)+" · reservada para "+dt(para)+(obs?" · "+obs:"")});closeModal();toast("Chave reservada para "+who+" em "+dt(para));if(motivo==="visita")avisarCondominio(id,m,who,para,obs)}
+          await db.doc("imoveis/"+id).update({reserva:{corretor:who,vinculo,para,obs,motivo,motivoDesc:mo.desc,criadaEm:nowISO(),por:S.uid||"",porNome:S.sessao?.nome||""},atualizadoEm:nowISO()});
+          logEv("reserva",{...evImv(id,m),corretor:who,detalhe:motivoTxt(motivo,mo.desc)+" · reservada para "+dt(para)+(obs?" · "+obs:"")});closeModal();toast("Chave reservada para "+who+" em "+dt(para));if(motivo==="visita")avisarCondominio(id,m,who,para,obs)}
         catch(e){$("#rOk").disabled=false;$("#rErr").textContent=writeErr(e)}
         return}
       const em=inputToISO($("#r_em").value)||nowISO(),prevISO=inputToISO($("#r_prev").value);
@@ -1423,27 +1430,33 @@ function retiradaDialog(id,preset){
     };
   });
 }
+// Horários da retirada no balcão (a cada 30 min)
+const HORARIOS_RET=(()=>{const a=[];for(let h=8;h<=18;h++)for(const mm of [0,30]){if(h===18&&mm)continue;a.push(String(h).padStart(2,"0")+":"+(mm?"30":"00"))}return a})();
 function reservaCorretor(id){
   const m=S.imoveis.get(id);if(!m)return;const eu=meuNomePl();
   if(m.reserva||m.retirada){toast("Esta chave já está reservada ou fora.");return}
-  const am=new Date(Date.now()+864e5),dflt=ymd.format(am);
+  const hoje=ymd.format(new Date()),am=new Date(Date.now()+864e5),dflt=ymd.format(am);
   openModal({sm:1,body:`<header><h2>Reservar chave</h2><button class="btn ghost x" data-close-btn>Fechar</button></header>
-  <div class="bd"><p><b>${esc(rotulo(m))}</b><br><span class="note">${esc([m.codigo?"cód. "+m.codigo:"",m.bairro].filter(Boolean).join(" · "))}</span></p>
-   <p class="note">Reserva em nome de <b>${esc(eu)}</b>. A retirada é feita na recepção no horário marcado.</p>
-   <div class="grid2"><label class="f big">Dia da retirada<input class="inp" id="rc_dia" type="date" value="${dflt}" min="${ymd.format(new Date())}"></label>
-   <label class="f big">Horário<input class="inp" id="rc_hora" type="time" value="09:00"></label></div>
+  <div class="bd"><div class="rcimv"><span class="rccod">${m.codigo?"Código "+esc(m.codigo):"Sem código"}</span><b>${esc(rotulo(m))}</b><span class="note">${esc([m.bairro,m.tipo].filter(Boolean).join(" · "))}</span></div>
+   <div class="grid2"><label class="f big">Data da retirada<input class="inp" id="rc_dia" type="date" value="${dflt}" min="${hoje}"></label>
+   <label class="f big">Horário da retirada<select class="sel" id="rc_hora"></select></label></div>
    ${motivoHtml("rc")}
    <label class="f">Observação (opcional)<input class="inp" id="rc_obs" placeholder="Ex.: visita com cliente"></label>
+   <p class="rcaviso">A retirada da chave deverá ser realizada no balcão da recepção da Park Sul Imóveis, na data e no horário agendados.</p>
+   <p class="note">Reserva em nome de <b>${esc(eu)}</b>.</p>
    <p class="err" id="rcErr"></p></div>
-  <footer><button class="btn" data-close-btn>Cancelar</button><button class="btn pri" id="rcOk">Reservar</button></footer>`},()=>{
+  <footer><button class="btn" data-close-btn>Cancelar</button><button class="btn pri" id="rcOk">Confirmar reserva</button></footer>`},()=>{
+    const fillHoras=()=>{const dia=$("#rc_dia").value,sel=$("#rc_hora"),antes=sel.value||"09:00";const agora=spLocal().slice(11,16);
+      const ok=HORARIOS_RET.filter(h=>dia!==hoje||h>agora);sel.innerHTML=ok.length?ok.map(h=>`<option ${h===antes?"selected":""}>${h}</option>`).join(""):`<option value="">Sem horários hoje</option>`};
+    $("#rc_dia").onchange=fillHoras;fillHoras();
     $("#rcOk").onclick=async()=>{
-      const dia=$("#rc_dia").value,hora=$("#rc_hora").value;if(!dia||!hora){$("#rcErr").textContent="Informe o dia e o horário.";return}
+      const dia=$("#rc_dia").value,hora=$("#rc_hora").value;if(!dia||!hora){$("#rcErr").textContent="Escolha a data e o horário da retirada.";return}
       const para=inputToISO(dia+"T"+hora);if(!para||new Date(para)<Date.now()-5*6e4){$("#rcErr").textContent="Escolha uma data e horário futuros.";return}
-      const motivo=motivoSel("rc");if(!motivo){$("#rcErr").textContent="Informe para que é a reserva.";return}
+      const mo=motivoLer("rc");if(mo.erro){$("#rcErr").textContent=mo.erro;return}const motivo=mo.k;
       const atual=S.imoveis.get(id);if(atual?.reserva||atual?.retirada){$("#rcErr").textContent="Alguém acabou de reservar ou retirar esta chave.";return}
       $("#rcOk").disabled=true;const obs=frase($("#rc_obs").value);
-      try{await db.doc("imoveis/"+id).update({reserva:{corretor:eu,vinculo:"Corretor PSI",para,obs,motivo,criadaEm:nowISO(),por:S.uid||"",porNome:eu},atualizadoEm:nowISO()});
-        logEv("reserva",{...evImv(id,m),corretor:eu,detalhe:motivoTxt(motivo)+" · reservada pelo corretor para "+dt(para)+(obs?" · "+obs:"")});closeModal();toast("Chave reservada para "+dt(para));if(motivo==="visita")avisarCondominio(id,m,eu,para,obs)}
+      try{await db.doc("imoveis/"+id).update({reserva:{corretor:eu,vinculo:"Corretor PSI",para,obs,motivo,motivoDesc:mo.desc,criadaEm:nowISO(),por:S.uid||"",porNome:eu},atualizadoEm:nowISO()});
+        logEv("reserva",{...evImv(id,m),corretor:eu,detalhe:motivoTxt(motivo,mo.desc)+" · reservada pelo corretor para "+dt(para)+(obs?" · "+obs:"")});closeModal();toast("Chave reservada para "+dt(para)+" · retirada no balcão da recepção");if(motivo==="visita")avisarCondominio(id,m,eu,para,obs)}
       catch(e){$("#rcOk").disabled=false;$("#rcErr").textContent=writeErr(e)}};
   });
 }
@@ -1870,7 +1883,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v9";
+const VERSAO_PAINEL="2026-10-29-v10";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
