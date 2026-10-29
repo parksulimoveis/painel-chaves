@@ -87,7 +87,7 @@ main .wrap{padding-block:26px 56px}
 .vag{font-size:.82rem;overflow-wrap:anywhere}.vag b{font-weight:800}.novotop .car{font-size:.7em;margin-left:4px;opacity:.85}
 .novowrap{position:relative;display:inline-flex}
 [id$="_motoutL"][hidden],.motdica[hidden]{display:none!important}.kcorr{white-space:nowrap}.kbwrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px}.kbsub{font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--muted);white-space:nowrap}
-.salvando{font-size:.75rem;font-weight:700;color:#D9C4A3;opacity:.85;animation:pisca 1s ease-in-out infinite}.salvando[hidden]{display:none}@keyframes pisca{50%{opacity:.4}}
+.salvando{font-size:.75rem;font-weight:700;color:#D9C4A3;opacity:.85;animation:pisca 1s ease-in-out infinite}.salvando[hidden]{display:none}#modal [hidden]{display:none!important}@keyframes pisca{50%{opacity:.4}}
 .cxl{font-size:.62em;font-weight:800;margin-right:3px;opacity:.75;letter-spacing:.04em}
 .rcimv{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:color-mix(in oklab,var(--line) 35%,transparent)}.rccod{font-family:var(--f-mono);font-size:.78rem;font-weight:700;color:var(--brass)}.rcaviso{margin:2px 0 0;padding:10px 12px;border-radius:10px;border-left:3px solid #c1652f;background:color-mix(in oklab,#c1652f 12%,transparent);font-size:.84rem;line-height:1.4}.motdica{margin:-6px 0 0}
 .motres{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
@@ -1885,7 +1885,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v11";
+const VERSAO_PAINEL="2026-10-29-v12";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
