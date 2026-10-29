@@ -925,7 +925,7 @@ function renderLista(fin,p,listId,countId,rotuloFin){
     const retEnt=ret?`<small class="saiu">Saiu ${esc(ret)}</small>${ent}`:(temChave&&!rv?"":"—");
     return `<div class="row${m.status==="indisponivel"?" ind":""}" style="--c:var(${s[1]})">${S.canWrite?`<button class="faixa" data-act="corrigir" data-id="${esc(id)}" title="Corrigir imóvel" aria-label="Corrigir imóvel">${lapis}</button>`:""}${mobCell(id,m)}${linkCell(m,id)}
       <div class="imv unc"><div class="t">${esc(unidadeTxt(m)||"—")}</div><div class="s">${esc([m.tipo,qtxt(m.quartos,m.tipo)].filter(Boolean).join(" · "))}</div></div>
-      <div class="imv" data-l="Edifício / residencial"><div class="t">${esc(m.endereco||"—")}</div>${m.obs?`<div class="s">${esc(m.obs)}</div>`:""}</div>
+      <div class="imv" data-l="Edifício / residencial"><div class="t">${esc(m.endereco||"—")}</div></div>
       <div class="bai" data-l="Bairro">${esc(m.bairro||"—")}</div>
       <div class="vag" data-l="Vagas de garagem">${vagaTxt(m)?esc(vagaTxt(m)):`<span class="acc">${m.temVaga===false?"Sem vaga":"—"}</span>`}</div>
       ${captCell(id,m)}
@@ -1863,7 +1863,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v7";
+const VERSAO_PAINEL="2026-10-29-v8";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
