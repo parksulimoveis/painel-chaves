@@ -826,7 +826,7 @@ function captadoresAtivos(){return [...S.corr.values()].filter(c=>c.ativo!==fals
 function captCell(id,m){
   const c=m.captador||"";
   if(!c)return `<div class="bai capc" data-l="Corretor captador"><span class="acc">—</span></div>`;
-  return `<div class="bai capc" data-l="Corretor captador"><b class="capn">${esc(c)}</b><small class="capl">${c===PSI_CAPT?"lead livre · qualquer corretor":"responsável pelos leads"}</small></div>`;
+  return `<div class="bai capc" data-l="Corretor captador"><b class="capn">${esc(c)}</b></div>`;
 }
 function statusCell(id,m){
   const s=STATUS[m.status]||STATUS.indisponivel;
@@ -1861,7 +1861,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v5";
+const VERSAO_PAINEL="2026-10-29-v6";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
