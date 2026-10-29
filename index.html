@@ -385,6 +385,8 @@ label.f.big .inp{font-size:1.05rem;min-height:46px}
 .kbtns:empty{display:none}
 .kbtn{white-space:normal;line-height:1.15;font-size:.74rem;padding:5px 8px;min-height:28px}
 .kcap .quem{font-size:.86rem;color:var(--st-anal)}
+.krow{display:flex;flex-direction:column;gap:4px;align-items:flex-start}.klbl{display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-top:4px;white-space:nowrap;color:var(--muted)}.klbl.kin{color:var(--st-disp)}.klbl.kfora{color:var(--st-anal)}.semch{display:inline-flex;align-items:center;height:30px;padding:0 10px;border-radius:7px;font-size:.75rem;font-weight:600;color:var(--muted);border:1px dashed color-mix(in oklab,var(--muted) 55%,transparent)}
+.row .keyc .tagbox{display:block}
 .keyc{min-width:0;font-size:.82rem;display:grid;gap:3px}
 .tagbox{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
 .ktag{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:.7rem;font-weight:500;background:var(--brass-soft);color:var(--brass-ink);border:1px solid color-mix(in oklab,var(--brass) 45%,transparent);border-radius:4px 10px 10px 4px;padding:1px 7px 1px 5px;line-height:1.4}
@@ -850,11 +852,16 @@ function secretTags(id,m){
   if(!S.sessao)return `${temFisico(ac)?`<span class="kbox"><span class="ktag mask">••</span><small>${objN}</small></span>`:''}${temSenhaAc(ac)?'<span class="kbox"><span class="ktag k-senha mask">••••</span><small>senha</small></span>':''}<span class="acc">na recepção</span>`;
   // Teste: número da chave e senha visíveis sem pedir senha (para voltar a ocultar, trocar MOSTRAR_CHAVES para false)
   const open=MOSTRAR_CHAVES||(S.reveal.get(id)||0)>Date.now();
+  // Número e senha lado a lado; um rótulo só embaixo. Sem número/senha cadastrados = "Sem chave".
+  const cx=localAc(ac)==="caixa";const obj=ac==="cartao"?"Cartão":ac==="senha"?"Senha":"Chave";
+  const numL=cx?sec?.caixa:sec?.chave;const sen=temSenhaAc(ac)?(sec?.senha||""):"";
+  const temNum=temFisico(ac)&&!!numL;
+  if(!temNum&&!sen)return `<span class="semch">Sem chave</span>${ac==="senha"||ac==="chave_senha"?`<small class="klbl">acesso por senha</small>`:ac==="cartao"?`<small class="klbl">acesso por cartão</small>`:""}`;
   let h="";
-  const cx=localAc(ac)==="caixa";const obj=ac==="cartao"?"Cartão":ac==="senha"?"Senha":"Chave";const ondeCh=m.retirada?obj+" fora":cx?obj+" na caixa":obj+" no quadro";
-  const numL=cx?sec?.caixa:sec?.chave;
-  if(temFisico(ac))h+=`<span class="kbox"><span class="ktag ${open?"":"mask"}">${open?(cx?'<b class="cxl">CX</b>':'')+esc(numL?n2(numL):"?"):"••"}</span><small class="${m.retirada?"kfora":"kin"}">${ondeCh}${ac==="parceiro"&&m.parceiro?" · "+esc(m.parceiro):""}</small></span>`;
-  if(temSenhaAc(ac))h+=`<span class="kbox"><span class="ktag k-senha ${open?"":"mask"}">${open?esc(sec?.senha||"?"):"••••"}</span><small>senha</small></span>`;
+  if(temNum)h+=`<span class="ktag ${open?"":"mask"}">${open?(cx?'<b class="cxl">CX</b>':'')+esc(n2(numL)):"••"}</span>`;
+  if(sen)h+=`<span class="ktag k-senha ${open?"":"mask"}">${open?esc(sen):"••••"}</span>`;
+  const onde=m.retirada?obj+" fora":temNum?(cx?obj+" na caixa":obj+" no quadro"):"Só senha";
+  h=`<span class="krow">${h}</span><small class="klbl ${m.retirada?"kfora":"kin"}">${onde}${ac==="parceiro"&&m.parceiro?" · "+esc(m.parceiro):""}</small>`;
   if(MOSTRAR_CHAVES)return h;
   return h+`<button class="eye" data-act="reveal" data-id="${esc(id)}" aria-label="${open?"Ocultar":"Mostrar"} chave e senha">${open?eyeOff:eyeOn}</button>`;
 }
@@ -862,7 +869,7 @@ function keyCell(id,m){
   const r=m.retirada;
   let st;
   if(r)st=`<span class="chcom">Chave com</span><span>${quemHtml(r.corretor,r.vinculo)}${atrasada(r)?'<span class="late">atrasada</span>':''}</span><span class="when">Retirada ${esc(dt(r.em))}${r.previsao?" · previsto para "+esc(dt(r.previsao)):""}</span><span class="aguard">Aguardando devolução da chave</span>`;
-  else st=(["chave","senha","cartao","chave_senha","parceiro"].includes(m.acesso))?`<span class="in">No quadro</span>`:"";
+  else st="";
   return `<div class="keyc" data-l="Chave / senha"><div class="tagbox">${secretTags(id,m)}</div>${st}<div class="kbtns">${chaveBtns(id,m)}</div></div>`;
 }
 // Botões da chave: ficam junto de "quem retirou"
@@ -1863,7 +1870,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v8";
+const VERSAO_PAINEL="2026-10-29-v9";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
