@@ -86,7 +86,7 @@ main .wrap{padding-block:26px 56px}
 .novotop{white-space:nowrap}
 .vag{font-size:.82rem;overflow-wrap:anywhere}.vag b{font-weight:800}.novotop .car{font-size:.7em;margin-left:4px;opacity:.85}
 .novowrap{position:relative;display:inline-flex}
-.kcorr{white-space:nowrap}
+[id$="_motoutL"][hidden],.motdica[hidden]{display:none!important}.kcorr{white-space:nowrap}.kbwrap{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px}.kbsub{font-size:.6rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--muted);white-space:nowrap}
 .salvando{font-size:.75rem;font-weight:700;color:#D9C4A3;opacity:.85;animation:pisca 1s ease-in-out infinite}.salvando[hidden]{display:none}@keyframes pisca{50%{opacity:.4}}
 .cxl{font-size:.62em;font-weight:800;margin-right:3px;opacity:.75;letter-spacing:.04em}
 .rcimv{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:color-mix(in oklab,var(--line) 35%,transparent)}.rccod{font-family:var(--f-mono);font-size:.78rem;font-weight:700;color:var(--brass)}.rcaviso{margin:2px 0 0;padding:10px 12px;border-radius:10px;border-left:3px solid #c1652f;background:color-mix(in oklab,#c1652f 12%,transparent);font-size:.84rem;line-height:1.4}.motdica{margin:-6px 0 0}
@@ -885,13 +885,14 @@ function chaveBtns(id,m){
     if(!(S.podeGravar&&souCorretorPl())||m.retirada)return "";
     const eu=meuNomePl();const temC=["chave","senha","cartao","chave_senha","parceiro"].includes(m.acesso);
     if(m.reserva)return m.reserva.corretor===eu?`<button class="btn sm ghost kbtn kcorr" data-act="cancelMinhaRes" data-id="${esc(id)}">Cancelar minha reserva</button>`:"";
-    return temC?`<button class="btn sm brass kbtn kcorr" data-act="reservarCorr" data-id="${esc(id)}">Reservar chave</button>`:""}
+    return `<span class="kbwrap"><button class="btn sm brass kbtn kcorr" data-act="reservarCorr" data-id="${esc(id)}">Reservar chave</button>${temC?"":'<small class="kbsub">agende a visita</small>'}</span>`}
   if(!S.canWrite)return "";
   const r=m.retirada,rv=!r&&m.reserva;const tem=["chave","senha","cartao","chave_senha","parceiro"].includes(m.acesso);
   if(r)return "";
+  if(rv&&!tem)return `<button class="btn sm ghost kbtn" data-act="cancelReserva" data-id="${esc(id)}">Cancelar reserva</button>`;
   if(rv)return `<button class="btn sm brass kbtn" data-act="retirar" data-id="${esc(id)}">Confirmar retirada</button><button class="btn sm ghost kbtn" data-act="cancelReserva" data-id="${esc(id)}">Cancelar reserva</button>`;
   if(tem)return `<button class="btn sm kbtn" data-act="retirar" data-id="${esc(id)}">Retirar chave</button>`;
-  return "";
+  return `<span class="kbwrap"><button class="btn sm brass kbtn" data-act="reservarSemChave" data-id="${esc(id)}">Reservar chave</button><small class="kbsub">agende a visita</small></span>`;
 }
 function actsCell(id,m){
   const r=m.retirada;
@@ -1347,7 +1348,7 @@ function imovelForm(id,finDefault,cautela=false){
   });
 }
 
-function retiradaDialog(id,preset){
+function retiradaDialog(id,preset,soReserva){
   const m=S.imoveis.get(id);
   if(!preset&&m.reserva)preset=corrList().includes(m.reserva.corretor)?m.reserva.corretor:"__outro";
   const prev=new Date(Date.now()+2*36e5);
@@ -1392,7 +1393,8 @@ function retiradaDialog(id,preset){
     const setModo=v=>{modo=v;document.querySelectorAll("#r_modo button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===v));$("#r_form").hidden=false;$("#rOk").hidden=false;$("#r_agora").hidden=v!=="agora";$("#r_res").hidden=v!=="reserva";
       $("#r_quem").textContent=v==="agora"?"Quem está retirando":"Para quem fica reservada";
       $("#r_tit").textContent=v==="agora"?"Registrar retirada da chave":"Reservar chave";$("#rOk").textContent=v==="agora"?"Registrar e gerar protocolo":"Reservar chave";$("#rErr").textContent=""};
-    if(m.reserva)setModo("agora");
+    if(soReserva){setModo("reserva");$("#r_modo").hidden=true;$("#r_modo").previousElementSibling.hidden=true;$("#r_res").insertAdjacentHTML("beforeend",`<p class="rcaviso">Imóvel sem chave na Park Sul. A reserva registra a visita; combine o acesso com o captador ou o proprietário.</p>`)}
+    else if(m.reserva)setModo("agora");
     document.querySelectorAll("#r_modo button").forEach(b=>b.onclick=()=>setModo(b.dataset.m));
     $("#rOk").onclick=async()=>{
       let who=$("#r_corr").value,vinculo=tipoPSI($("#r_corr").value)||"Corretor PSI";
@@ -1442,7 +1444,7 @@ function reservaCorretor(id){
    <label class="f big">Horário da retirada<select class="sel" id="rc_hora"></select></label></div>
    ${motivoHtml("rc")}
    <label class="f">Observação (opcional)<input class="inp" id="rc_obs" placeholder="Ex.: visita com cliente"></label>
-   <p class="rcaviso">A retirada da chave deverá ser realizada no balcão da recepção da Park Sul Imóveis, na data e no horário agendados.</p>
+   <p class="rcaviso">${["chave","senha","cartao","chave_senha","parceiro"].includes(m.acesso)?"A retirada da chave deverá ser realizada no balcão da recepção da Park Sul Imóveis, na data e no horário agendados.":"Imóvel sem chave na Park Sul. A reserva registra a sua visita; combine o acesso com o captador ou o proprietário."}</p>
    <p class="note">Reserva em nome de <b>${esc(eu)}</b>.</p>
    <p class="err" id="rcErr"></p></div>
   <footer><button class="btn" data-close-btn>Cancelar</button><button class="btn pri" id="rcOk">Confirmar reserva</button></footer>`},()=>{
@@ -1821,7 +1823,7 @@ document.addEventListener("click",e=>{
   if(t){const id=t.dataset.id,a=t.dataset.act;
     if(a==="reveal"){if((S.reveal.get(id)||0)>Date.now()){S.reveal.delete(id);schedule()}else pinDialog("Revelar chave e senha",()=>{S.reveal.set(id,Date.now()+30000);schedule();setTimeout(schedule,30100)})}
     else if(a==="chstatus")pedirStatus(id,t.dataset.fin);
-    else if(a==="reservarCorr")reservaCorretor(id);
+    else if(a==="reservarCorr")reservaCorretor(id);else if(a==="reservarSemChave")retiradaDialog(id,null,true);
     else if(a==="cancelMinhaRes"){const m=S.imoveis.get(id);if(!m?.reserva||m.reserva.corretor!==meuNomePl())return;
       if(!t.dataset.c){t.dataset.c=1;t.textContent="Confirmar cancelamento";setTimeout(()=>{if(t.isConnected){delete t.dataset.c;t.textContent="Cancelar minha reserva"}},4000);return}
       db.doc("imoveis/"+id).update({reserva:null,atualizadoEm:nowISO()}).then(()=>{logEv("reserva_cancelada",{...evImv(id,m),corretor:meuNomePl(),detalhe:"Cancelada pelo corretor"});toast("Reserva cancelada")}).catch(e=>toast(writeErr(e)))}
@@ -1883,7 +1885,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v10";
+const VERSAO_PAINEL="2026-10-29-v11";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
