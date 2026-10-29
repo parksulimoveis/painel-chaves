@@ -891,11 +891,13 @@ const temVagaM=m=>m.temVaga!=null?!!m.temVaga:(m.vagas>0);
 const vagaTxt=m=>temVagaM(m)?(m.vaga||vtxt(m.vagas)||"Tem vaga"):"";
 const qtxt=(n,tipo)=>n==null?"":n===0?(["Sala","Loja","Lote","Outros"].includes(tipo)?"":"Sem quartos"):`${n} quarto${n>1?"s":""}`;
 /* ---------- Aba Locação ---------- */
+// Indisponível para devolver ao proprietário: só a gerência vê
+const devolverProp=m=>m.status==="indisponivel"&&/devol[a-z\u00e7\u00e3]*\s+(ao|para o)\s+propriet/i.test(m.statusObs||"");
 function renderLista(fin,p,listId,countId,rotuloFin){
   if(!S.ready)return;
   const v=k=>$("#"+p+k).value;
   { const lb=document.querySelector(`[data-limpar="${p}"]`);if(lb)lb.classList.toggle("on",["q","Tipo","Quartos","Bairro","Status","Chave"].some(k=>($("#"+p+k)?.value||"").trim()!=="")); }const q=$("#"+p+"q").value.trim().toLowerCase(),ft=v("Tipo"),fq=v("Quartos"),fb=v("Bairro"),fs=v("Status"),fc=v("Chave");
-  const all=[...S.imoveis.entries()].map(([id,m])=>[id,vista(m,fin)]).filter(([,m])=>m&&ativoImv(m)&&!m.cautela);
+  const all=[...S.imoveis.entries()].map(([id,m])=>[id,vista(m,fin)]).filter(([,m])=>m&&ativoImv(m)&&!m.cautela&&(S.admin||!devolverProp(m)));
   const rows=all.filter(([,m])=>{
     if(ft&&m.tipo!==ft)return false;
     if(fq!==""&&String(m.quartos??0)!==fq)return false;
@@ -1861,7 +1863,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-10-29-v6";
+const VERSAO_PAINEL="2026-10-29-v7";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
