@@ -265,8 +265,8 @@ main .wrap{padding-block:26px 56px}
 .previa{color:var(--gold)!important;border:1px solid color-mix(in oklab,var(--gold) 45%,transparent)!important;white-space:nowrap}
 /* Interface do usuário: some tudo que é de administração */
 .usuario .tabs,.usuario .menuwrap,.usuario #btnNovoTop,.usuario [data-new],.usuario [data-corrigir],.usuario .faixa,.usuario .acts .pri,.usuario .kbtn:not(.kcorr){display:none!important}
-.usuario .row .keyc,.usuario .head .hk{visibility:hidden}
-@media (max-width:760px){.usuario .row .keyc{display:none}.usuario .row .stc{grid-column:1/-1}}
+
+@media (max-width:760px){}
 .usuario #listL .head>:last-child,.usuario #listV .head>:last-child{visibility:hidden}
 .stat.on{background:color-mix(in oklab,var(--gold) 26%,transparent);box-shadow:inset 0 0 0 2px var(--gold)}
 .filtro-ativo{display:inline-flex;align-items:center;gap:6px;background:var(--acc-soft);border:1px solid var(--gold);border-radius:99px;padding:3px 10px;font-size:.78rem;font-weight:600;margin-left:8px;cursor:pointer;color:var(--fg)}
@@ -846,7 +846,7 @@ function secretTags(id,m){
   if(ac==="captador")return `<span class="kcap"><span class="chcom">Chave com o captador</span><b class="quem">${esc(m.captador||"captador não definido")}</b></span>`;
   if(ac==="proprietario"||ac==="nao_informado")return `<span class="acc">${esc(ACESSO[ac])}</span>`;
   const objN=ac==="cartao"?"cartão":ac==="senha"?"caixa":"chave";
-  if(!S.master)return `${temFisico(ac)?`<span class="kbox"><span class="ktag mask">••</span><small>${objN}</small></span>`:''}${temSenhaAc(ac)?'<span class="kbox"><span class="ktag k-senha mask">••••</span><small>senha</small></span>':''}<span class="acc">na recepção</span>`;
+  if(!S.sessao)return `${temFisico(ac)?`<span class="kbox"><span class="ktag mask">••</span><small>${objN}</small></span>`:''}${temSenhaAc(ac)?'<span class="kbox"><span class="ktag k-senha mask">••••</span><small>senha</small></span>':''}<span class="acc">na recepção</span>`;
   // Teste: número da chave e senha visíveis sem pedir senha (para voltar a ocultar, trocar MOSTRAR_CHAVES para false)
   const open=MOSTRAR_CHAVES||(S.reveal.get(id)||0)>Date.now();
   let h="";
@@ -1221,7 +1221,7 @@ function imovelForm(id,finDefault,cautela=false){
    <div class="sec">Acesso ao imóvel</div>
    <div class="grid2">
     <label class="f">O imóvel tem *<select class="sel" id="i_acesso">${[...ACESSO_FORM,...(id?["nao_informado"]:[])].map(k=>`<option value="${k}" ${k===(m.acesso||"chave")?"selected":""}>${ACESSO[k]}</option>`).join("")}</select></label>
-    ${S.admin?`<label class="f" id="lb_parc" hidden>Imobiliária parceira *<input class="inp" id="i_parc" value="${esc(m.parceiro||"")}" placeholder="Ex.: Imobiliária X"></label>
+    ${(S.admin||souCorr)?`<label class="f" id="lb_parc" hidden>Imobiliária parceira *<input class="inp" id="i_parc" value="${esc(m.parceiro||"")}" placeholder="Ex.: Imobiliária X"></label>
     <label class="f" id="lb_chave"><span id="lbChTxt">Escolha a numeração da chave *</span><select class="sel" id="i_chave" style="font-family:var(--f-mono)"></select><span class="note" id="clavInfo"></span></label>
     <label class="f" id="lb_senha">Senha da porta *<input class="inp" id="i_senha" value="${esc(sec.senha)}" style="font-family:var(--f-mono)" autocomplete="off" placeholder="Ex.: 2265V"></label>`:`<p class="note">Número da chave e senha só podem ser vistos e editados pela gerência.</p>`}
    </div>
@@ -1242,13 +1242,13 @@ function imovelForm(id,finDefault,cautela=false){
     const atualDe=loc=>n2(String((loc==="caixa"?sec.caixa:sec.chave)||"").trim());
     const chAtual=atualDe(localAc(m.acesso)||"clav");
     let ultLoc=null;
-    const syncClav=()=>{if(!S.admin)return;const sel=$("#i_chave"),fin=finPrim(),loc=locAtual(),max=LOCAL_MAX[loc];
+    const syncClav=()=>{if(!(S.admin||souCorr))return;const sel=$("#i_chave"),fin=finPrim(),loc=locAtual(),max=LOCAL_MAX[loc];
       const prev=(ultLoc===loc&&sel.value)||atualDe(loc);ultLoc=loc;const oc=clavOcupadas(fin,id,loc);
       const livres=[];for(let n=1;n<=max;n++)if(!oc.has(n))livres.push(n2(n));
       const atualFora=prev&&!livres.includes(prev);
       sel.innerHTML=`<option value="">Selecione o número…</option>`+(atualFora?`<option value="${esc(prev)}">${esc(prev)}${/^\d+$/.test(prev)&&oc.has(+prev)?" · ocupado por outro imóvel":" · atual"}</option>`:"")+livres.map(n=>`<option value="${n}">${n}</option>`).join("");
       sel.value=prev;$("#clavInfo").textContent=`${LOCAL_NOME[loc]} de ${fin==="venda"?"venda":"locação"} (01 a ${n2(max)}) · ${livres.length} livres`};
-    const syncAc=()=>{if(!S.admin)return;const a=$("#i_acesso").value;$("#lb_chave").hidden=!temFisico(a);$("#lb_senha").hidden=!temSenhaAc(a);$("#lb_parc").hidden=a!=="parceiro";
+    const syncAc=()=>{if(!(S.admin||souCorr))return;const a=$("#i_acesso").value;$("#lb_chave").hidden=!temFisico(a);$("#lb_senha").hidden=!temSenhaAc(a);$("#lb_parc").hidden=a!=="parceiro";
       $("#lbChTxt").textContent=localAc(a)==="caixa"?"Escolha o número da caixa *":"Escolha a numeração da chave *";syncClav()};
     $("#i_acesso").addEventListener("change",syncAc);setTimeout(syncAc);
     $("#i_fin").addEventListener("change",syncClav);
@@ -1275,7 +1275,7 @@ function imovelForm(id,finDefault,cautela=false){
           if(g("i_vagaTem")==="sim"&&!g("i_vaga"))return falta("Descreva a vaga de garagem (ex.: mesmo número do apto).");
           if(g("i_acesso")==="nao_informado")return falta("Informe como se acessa o imóvel (chave, senha…).");
         }
-        if(S.admin){const a=g("i_acesso"),ch=g("i_chave"),sn=$("#i_senha").value.trim();
+        if(S.admin||souCorr){const a=g("i_acesso"),ch=g("i_chave"),sn=$("#i_senha").value.trim();
           const pedeCh=temFisico(a),pedeSn=temSenhaAc(a);
           const locV=localAc(a);
           if(a==="parceiro"&&!g("i_parc"))return falta("Informe a imobiliária parceira.");
@@ -1320,7 +1320,7 @@ function imovelForm(id,finDefault,cautela=false){
         const ref=id?db.doc("imoveis/"+id):db.collection("imoveis").doc();
         if(id)await ref.update(data);else{const mx=Math.max(0,...[...S.imoveis.values()].filter(x=>x.finalidade===data.finalidade).map(x=>x.ordem||0));await ref.set({...data,retirada:null,ordem:mx+1})}
         logEv(id?"edicao":"cadastro",{imovelId:ref.id,imovelRotulo:rotulo(data),codigo:data.codigo});
-        if(S.admin){const a=g("i_acesso"),loc=localAc(a);const v=g("i_chave");const ch=loc==="clav"?v:"",cx=loc==="caixa"?v:"",sn=temSenhaAc(a)?$("#i_senha").value.trim():"";const old=S.seg.get(ref.id)||{};
+        if(S.admin||(souCorr&&!id)){const a=g("i_acesso"),loc=localAc(a);const v=g("i_chave");const ch=loc==="clav"?v:"",cx=loc==="caixa"?v:"",sn=temSenhaAc(a)?$("#i_senha").value.trim():"";const old=S.seg.get(ref.id)||{};
           if(ch!==(old.chave||"")||sn!==(old.senha||"")||cx!==(old.caixa||""))await db.doc("seg/"+ref.id).set({chave:ch,senha:sn,caixa:cx})}
         closeModal();
         if(!id){const destino=data.finalidade==="venda"?"ven":"loc";if(document.documentElement.dataset.fin!==destino)setView(destino);toast(`Imóvel cadastrado em ${finSel==="ambos"?"venda e locação":data.finalidade==="venda"?"venda":"locação"}`)}else toast("Imóvel atualizado");
