@@ -1916,9 +1916,9 @@ function ligarEscutas(){
 async function entrouOk(){S.admin=!!S.sessao?.master;S.uid=S.sessao?.id||null;S.podeGravar=true;aplicarPerfil();ligarEscutas();$("#whoRole")&&($("#whoRole").textContent="");await sincronizar(true);iniciarSync();telaImportar()}
 // Importação inicial (uma vez): o master escolhe o arquivo de backup do painel antigo
 function telaImportar(){
-  if(!S.sessao?.master||(DATA.imoveis&&DATA.imoveis.size))return;
+  if(!S.sessao?.master||(!S.sessao.boot&&DATA.imoveis&&DATA.imoveis.size))return;
   openModal({sm:1,body:`<header><h2>Importar dados</h2><button class="btn ghost x" data-close-btn>Fechar</button></header>
-  <div class="bd"><p>O sistema ainda está vazio. Escolha o arquivo de backup do painel anterior (<b>backup-painel-….json</b>) para trazer imóveis, chaves, corretores, histórico e plantão.</p>
+  <div class="bd"><p>Para carregar os dados do painel anterior, escolha o arquivo de backup do painel anterior (<b>backup-painel-….json</b>) para trazer imóveis, chaves, corretores, histórico e plantão.</p>
   <input type="file" id="impArq" accept=".json,application/json" class="inp"><p class="err" id="impErr"></p></div>
   <footer><button class="btn" data-close-btn>Agora não</button><button class="btn pri" id="impOk">Importar</button></footer>`},()=>{
     $("#impOk").onclick=async()=>{const f=$("#impArq").files[0];if(!f){$("#impErr").textContent="Escolha o arquivo.";return}
