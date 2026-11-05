@@ -528,6 +528,33 @@ html.autpub body>*:not(#autPub):not(#modal):not(#toast){display:none!important}
 #v-fvenda .fvgrid .mtile.fpTile:hover,#v-fvenda .fvgrid .mtile.fpTile:focus-visible{background:#16294a!important;border-color:#16294a!important}
 #fvForm [data-casado][hidden],#fpForm [data-casado][hidden],#v-fvend [hidden]{display:none!important}
 html:not(.fichasac) .fpTile{display:none!important}
+/* indicadores de locação */
+.ilfil{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:12px}.ilfil .f{flex:1 1 140px;min-width:0}.ilfil .btn{flex:none}
+.iltabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:6px;scrollbar-width:thin}.iltabs button{flex:none;font:600 .9rem/1 inherit;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.iltabs button[aria-selected="true"]{background:#0B1628;color:#fff;border-color:#0B1628}:root[data-theme="dark"] .iltabs button[aria-selected="true"]{background:#f8f8f6;color:#0B1628;border-color:#f8f8f6}
+.ilsub{margin:4px 0 12px}
+.ilkpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.ilk{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:2px;min-width:0}.ilk span{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted,#6B7A99);font-weight:700}
+.ilk b{font-family:var(--f-display);font-size:1.65rem;line-height:1.15;color:var(--fg);overflow-wrap:anywhere}.ilk small{color:var(--muted,#6B7A99);font-size:.78rem}.ilk.ouro b{color:#C1652F}.ilk.alerta b{color:#B3261E}
+.ilg2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px;margin-bottom:12px}@media(max-width:860px){.ilg2{grid-template-columns:minmax(0,1fr)}}
+.ilp{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0;margin-bottom:12px}.ilg2>.ilp{margin-bottom:0}.ilp h3{margin:0;font-size:1rem}.ilp>.note{margin:2px 0 10px}
+.ilbars{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:4px;height:180px;align-items:end;margin-top:26px}
+.ilb{display:flex;gap:2px;align-items:flex-end;justify-content:center;height:100%;position:relative;padding-bottom:18px;min-width:0}
+.ilb i{display:block;flex:1;max-width:22px;border-radius:4px 4px 0 0;position:relative;min-width:3px}.ilb i em{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font:700 .62rem/1.4 inherit;color:var(--fg);font-style:normal;white-space:nowrap}
+.ilb small{position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-size:.62rem;color:var(--muted,#6B7A99);white-space:nowrap}
+:root[data-theme="dark"] .ilb i[style*="#0B1628"]{background:#a9bbdc!important}
+.illeg{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:.8rem;color:var(--muted,#6B7A99)}.illeg span{display:flex;align-items:center;gap:6px}.illeg b{width:10px;height:10px;border-radius:3px;display:inline-block}
+:root[data-theme="dark"] .illeg b[style*="#0B1628"],:root[data-theme="dark"] .ilseg b[style*="#0B1628"],:root[data-theme="dark"] .ilsegl b[style*="#0B1628"]{background:#a9bbdc!important}
+.ilseg{display:flex;height:16px;border-radius:999px;overflow:hidden;gap:2px;background:var(--line);margin-top:8px}.ilseg b{display:block;min-width:3px}
+.ilsegl{display:grid;gap:6px;margin-top:10px}.ilsegl>div{display:grid;grid-template-columns:12px minmax(0,1fr) auto 42px;gap:8px;align-items:center;font-size:.86rem}.ilsegl b{width:10px;height:10px;border-radius:3px}.ilsegl strong{font-variant-numeric:tabular-nums}.ilsegl small{color:var(--muted,#6B7A99);text-align:right}
+.ilrank{display:grid;gap:8px}.ilrank>div{display:grid;grid-template-columns:24px minmax(0,1fr) minmax(60px,1fr) auto;gap:8px;align-items:center;font-size:.88rem}
+.ilpos{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .72rem/1 inherit;background:var(--line);color:var(--fg)}.ilpos.m1{background:#d6b25c;color:#0B1628}.ilpos.m2{background:#c7ced0;color:#0B1628}.ilpos.m3{background:#cd8a52;color:#fff}
+.iln{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.iltr{height:8px;border-radius:999px;background:var(--line);overflow:hidden}.iltr i{display:block;height:100%;background:#C1652F;border-radius:999px}.ilrank strong{font-variant-numeric:tabular-nums;text-align:right}
+.iltab{width:100%;border-collapse:collapse;font-size:.88rem}.iltab th,.iltab td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.iltab .n{text-align:right;font-variant-numeric:tabular-nums}.iltab tr.inat td{color:var(--muted,#6B7A99)}
+.illig{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.iltime{display:grid;gap:2px;padding:8px 0;border-top:1px solid var(--line)}.iltime:first-of-type{border-top:0}.iltime span{color:var(--muted,#6B7A99);font-size:.88rem}
+.ilerro{background:var(--surface);border:1px solid #C1652F;border-radius:14px;padding:16px;display:grid;gap:8px;justify-items:start}
+@media(max-width:560px){.ilrank>div{grid-template-columns:24px minmax(0,1fr) auto}.iltr{display:none}.ilbars{height:150px;margin-top:10px}.ilb i em{display:none}.ilk b{font-size:1.3rem;overflow-wrap:normal}.ilkpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 /* tema azul (escuro): botões do menu um pouco mais claros; painel de fichas em branco */
 :root[data-theme="dark"] .hgrid:not(.cgrid) .mtile:not(:first-child),:root[data-theme="dark"] #v-fvenda .fvgrid .mtile:not(.fpTile){background:#1e3255!important;border-color:#3a5179!important;box-shadow:0 10px 26px -18px rgba(0,0,0,.8)}
 :root[data-theme="dark"] .hgrid:not(.cgrid) .mtile:not(:first-child):hover,:root[data-theme="dark"] #v-fvenda .fvgrid .mtile:not(.fpTile):hover{background:#263d66!important;border-color:#e08a52!important}
@@ -1035,6 +1062,7 @@ label.f .inp,label.f .sel{color:var(--fg);font-size:.9rem;width:100%}
     </div>
     <p class="hsec secInd">Indicadores</p>
     <button class="mtile mind secInd" type="button" data-goto="ind"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16M7 16V9M12 16V5M17 16v-4"/></svg></span><span><span class="mk">Captações</span><b>Indicadores de captação</b><span class="md">Quantidade, volume, ticket médio e regiões das captações, por período.</span></span></button>
+    <button class="mtile mind secInd" type="button" data-goto="indloc"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span><span class="mk">Locação · administração</span><b>Indicadores de locação</b><span class="md">Captações, locações, VGL, fechamentos, vistorias, renovações, rankings e equipes.</span></span></button>
     <div class="hmaster">
       <p class="hsec">Gestão</p>
       <div class="ggrid">
@@ -1156,6 +1184,8 @@ label.f .inp,label.f .sel{color:var(--fg);font-size:.9rem;width:100%}
     </div>
     <div id="indBox"></div>
   </section>
+
+  <section id="v-indloc" hidden><div id="ilBox"></div></section>
 
   <section id="v-agenda" hidden>
     <p class="count">Visitas e reservas agendadas e as chaves que estão fora agora. Toque em “Agenda” para ver os detalhes de um imóvel.</p>
@@ -2108,6 +2138,120 @@ function captacoes(){
       const dia=ymd.format(new Date(v.dataAnuncio||raw.dataAnuncio||raw.criadoEm||0));if(!v.dataAnuncio&&!raw.dataAnuncio&&!raw.criadoEm)continue;
       out.push({id,fin,dia,valor:Number(v.valor)||0,captador:(raw.captador||"").trim()||"Não informado",bairro:(raw.bairro||"").trim()||"Sem bairro",rot:rotulo(v),codigo:raw.codigo||"",status:v.status,arq:!!v.arquivado})}}
   return out}
+/* ---------- Indicadores de locação (lê a planilha "Locações" pelo servidor) ---------- */
+const TIMES_LOC=["Time Sniper","Time Elite","Time 1 One"];
+// nomes como aparecem na planilha → cadastro (id). Os demais se ligam pelo nome; os sem cadastro aparecem como estão
+const LOC_ALIAS={"wendia alves":"wendia-alves","wendia sousa":"wendia-alves","wendia cruz":"wendia-alves","julio cesar":"julio-rolim","julio rolim":"julio-rolim",
+  "naiane sousa":"naiane-da-cruz","naiane cruz":"naiane-da-cruz","naiane":"naiane-da-cruz","patricia":"patricia","patricia reis":"patricia","marcus":"marcus-vinicius","marcus vinicius":"marcus-vinicius","marcus jr.":"marcus-vinicius","marcus jr":"marcus-vinicius",
+  "jacqueline moura":"jacqueline-moura","elisangela":"elisangela-albuquerque","elis":"elisangela-albuquerque","jean":"jean-cichy","talysson":"thalisson","thalisson":"thalisson","thalisson medeiros":"thalisson",
+  "jafe":"jafe-melo","silene":"silene","silene lemos":"silene","eliana":"eliana","eliana rabelo":"eliana","rafael":"rafael","samuel":"samuel","bruno":"bruno-candido","flavio silva":"flavio-silva","ari alves":"ari-alves","aurelio magno":"aurelio-magno","saulo soares":"saulo-soares"};
+// equipes do painel de locação (quando o cadastro ainda não tem a equipe)
+const LOC_TIME_PADRAO={"julio-rolim":"Time Sniper","angela oliveira":"Time Sniper","psi":"Time Sniper","samuel":"Time Sniper","aurelio-magno":"Time Elite","naiane-da-cruz":"Time Elite","elisangela-albuquerque":"Time Elite","wendia-alves":"Time Elite","hudson":"Time Elite","silene":"Time Elite","eliana":"Time Elite","bruno-candido":"Time Elite","johnson-rolim":"Time Elite",
+  "saulo-soares":"Time 1 One","flavio-silva":"Time 1 One","ari-alves":"Time 1 One","jacqueline-moura":"Time 1 One","rildo tavares":"Time 1 One","jean-cichy":"Time 1 One","rafael":"Time 1 One","jafe-melo":"Time 1 One","alan-noleto":"Time 1 One","marcus-vinicius":"Time 1 One","patricia":"Time 1 One","thalisson":"Time 1 One","andre barbosa":"Time 1 One","ceica":"Time 1 One","viviane":"Time 1 One","rudson":"Time 1 One"};
+const MESES_ABR=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+const brl0=v=>"R$ "+Number(v||0).toLocaleString("pt-BR",{minimumFractionDigits:0,maximumFractionDigits:0});
+const chaveNome=t=>semAcento(String(t||"")).toLowerCase().replace(/\s+/g," ").trim();
+function corrLoc(nome){const k=chaveNome(nome);if(!k)return {id:"",nome:"Sem corretor",ativo:true,time:""};
+  if(k==="psi"||k==="park sul")return {id:"psi",nome:"Park Sul (imobiliária)",ativo:true,time:LOC_TIME_PADRAO.psi};
+  const alias=(S.locAlias||{})[k]||LOC_ALIAS[k];let id=alias&&S.corr?.has(alias)?alias:"";
+  if(!id&&S.corr){for(const [cid,c] of S.corr){const n=chaveNome(c.nome);if(n===k){id=cid;break}}}
+  if(!id&&S.corr){const t=k.split(" ");if(t.length>=2){const m=[...S.corr].filter(([cid,c])=>{const n=chaveNome(c.nome).split(" ");return n[0]===t[0]&&n.includes(t[t.length-1])});if(m.length===1)id=m[0][0]}}
+  if(id){const c=S.corr.get(id);return {id,nome:c.nome,ativo:c.ativo!==false,time:c.time||LOC_TIME_PADRAO[id]||""}}
+  const bonito=String(nome).trim().replace(/\s+/g," ").replace(/\b\w/g,x=>x.toUpperCase());
+  return {id:"~"+k,nome:bonito,ativo:false,time:LOC_TIME_PADRAO[k]||"",semCadastro:true}}
+async function carregarLoc(novo){if(S.locCarregando)return;S.locCarregando=true;$("#ilBox").innerHTML=`<p class="note">Lendo a planilha Locações…</p>`;
+  try{const r=await api("locacaoDados",{novo:!!novo});S.loc=r.d;S.locErro=""}catch(e){S.locErro=e.message}finally{S.locCarregando=false}renderIndLoc()}
+function locFiltrar(L,F,tem){return L.filter(r=>{if(F.ano&&r.ano!==F.ano)return false;if(F.mes&&r.mes!==F.mes)return false;
+  if(tem.reg&&F.reg&&chaveNome(r.reg)!==F.reg)return false;
+  if(tem.corr&&(F.corr||F.time)){const c=corrLoc(r.corr);if(F.corr&&c.id!==F.corr)return false;if(F.time&&c.time!==F.time)return false}return true})}
+const contar=(L,f)=>{const m=new Map();L.forEach(r=>{const k=f(r)||"—";m.set(k,(m.get(k)||0)+1)});return [...m].sort((a,b)=>b[1]-a[1])};
+const somar=(L,f,v)=>{const m=new Map();L.forEach(r=>{const k=f(r)||"—";m.set(k,(m.get(k)||0)+(v(r)||0))});return [...m].sort((a,b)=>b[1]-a[1])};
+const IL_COR=["#0B1628","#C1652F","#6B7A99","#D9C4A3","#6F4E37","#2f6fb5","#8e9bb5"];
+function ilBarras(series,meses){// series: [{nome,cor,vals:[...]}]
+  const mx=Math.max(1,...series.flatMap(s=>s.vals));
+  return `<div class="ilbars" style="--n:${meses.length}">${meses.map((m,i)=>`<div class="ilb" title="${esc(m.l)}: ${series.map(s=>s.nome+" "+s.vals[i]).join(" · ")}">${series.map(s=>`<i style="height:${s.vals[i]?Math.max(4,s.vals[i]/mx*100):0}%;background:${s.cor}"><em>${s.vals[i]||""}</em></i>`).join("")}<small>${esc(m.c)}</small></div>`).join("")}</div>
+    ${series.length>1?`<div class="illeg">${series.map(s=>`<span><b style="background:${s.cor}"></b>${esc(s.nome)}</span>`).join("")}</div>`:""}`}
+function ilSeg(pares,total,fmt){total=total||pares.reduce((a,p)=>a+p[1],0)||1;
+  return `<div class="ilseg">${pares.map((p,i)=>`<b style="flex:${p[1]};background:${IL_COR[i%IL_COR.length]}" title="${esc(p[0])}: ${fmt?fmt(p[1]):p[1]}"></b>`).join("")}</div>
+  <div class="ilsegl">${pares.map((p,i)=>`<div><b style="background:${IL_COR[i%IL_COR.length]}"></b><span>${esc(p[0])}</span><strong>${fmt?fmt(p[1]):p[1]}</strong><small>${Math.round(p[1]/total*100)}%</small></div>`).join("")}</div>`}
+function ilRank(pares,fmt,n){const mx=Math.max(1,...pares.map(p=>p[1]));return `<div class="ilrank">${pares.slice(0,n||10).map((p,i)=>`<div><span class="ilpos ${i<3?"m"+(i+1):""}">${i+1}</span><span class="iln">${esc(p[0])}</span><span class="iltr"><i style="width:${p[1]/mx*100}%"></i></span><strong>${fmt?fmt(p[1]):p[1]}</strong></div>`).join("")||`<p class="note">Sem dados no período.</p>`}</div>`}
+const ilKpi=(t,v,s,cl)=>`<div class="ilk ${cl||""}"><span>${esc(t)}</span><b>${v}</b><small>${esc(s||"")}</small></div>`;
+const ilPan=(t,sub,html,cl)=>`<div class="ilp ${cl||""}"><h3>${esc(t)}</h3>${sub?`<p class="note">${esc(sub)}</p>`:""}${html}</div>`;
+function ilMeses(F,listas){// eixo de meses do período filtrado
+  if(F.ano&&F.mes)return [{a:F.ano,m:F.mes,c:MESES_ABR[F.mes-1],l:MESES_ABR[F.mes-1]+"/"+F.ano}];
+  if(F.ano)return MESES_ABR.map((c,i)=>({a:F.ano,m:i+1,c,l:c+"/"+F.ano}));
+  const ks=new Set();listas.flat().forEach(r=>{if(r.ano&&r.mes)ks.add(r.ano*100+r.mes)});const arr=[...ks].sort();if(!arr.length)return [];
+  const out=[];let a=Math.floor(arr[0]/100),m=arr[0]%100;const fim=arr[arr.length-1];while(a*100+m<=fim){out.push({a,m,c:MESES_ABR[m-1]+(m===1||!out.length?"/"+String(a).slice(2):""),l:MESES_ABR[m-1]+"/"+a});m++;if(m>12){m=1;a++}}return out}
+const porMes=(L,meses)=>meses.map(x=>L.filter(r=>r.ano===x.a&&r.mes===x.m).length);
+const somaMes=(L,meses,v)=>meses.map(x=>Math.round(L.filter(r=>r.ano===x.a&&r.mes===x.m).reduce((s,r)=>s+(v(r)||0),0)));
+function renderIndLoc(){const box=$("#ilBox");if(!box)return;
+  if(S.locErro){box.innerHTML=`<div class="ilerro"><b>Não consegui ler a planilha.</b><p>${esc(S.locErro)}</p><button class="btn" type="button" id="ilTentar">Tentar de novo</button></div>`;$("#ilTentar").onclick=()=>carregarLoc(true);return}
+  if(!S.loc){carregarLoc();return}
+  const D=S.loc,F=S.ilF||(S.ilF={aba:"geral",ano:new Date().getFullYear(),mes:0,corr:"",time:"",reg:""});
+  const anos=[...new Set([...D.adm,...D.loc,...D.fec].map(r=>r.ano).filter(Boolean))].sort();
+  const todosCorr=new Map();[...D.adm,...D.loc].forEach(r=>{const c=corrLoc(r.corr);if(c.id)todosCorr.set(c.id,c)});
+  const regs=[...new Set([...D.adm,...D.loc,...D.fec].map(r=>chaveNome(r.reg)).filter(Boolean))].sort();
+  const regNome=k=>{const r=[...D.adm,...D.loc,...D.fec].find(x=>chaveNome(x.reg)===k);return r?String(r.reg).trim():k};
+  const adm=locFiltrar(D.adm,F,{reg:1,corr:1}),loc=locFiltrar(D.loc,F,{reg:1,corr:1}),fec=locFiltrar(D.fec,F,{reg:1}),vis=locFiltrar(D.vis,F,{}),ren=locFiltrar(D.ren,F,{}),rea=locFiltrar(D.rea,F,{});
+  const meses=ilMeses(F,[D.adm,D.loc,D.fec]);
+  const vgl=loc.reduce((s,r)=>s+r.val,0),vadm=adm.reduce((s,r)=>s+r.val,0);
+  const nomeC=r=>{const c=corrLoc(r.corr);return c.nome+(c.semCadastro?" *":c.ativo?"":" (inativo)")};
+  const timeC=r=>corrLoc(r.corr).time||"Sem equipe";
+  const garN=g=>({CAUCAO:"Caução",FIADOR:"Fiador",FIANCA:"Fiança",CAPITALIZACAO:"Capitalização","SEM GARANTIA":"Sem garantia"})[g]||(g?g.charAt(0)+g.slice(1).toLowerCase():"Não informada");
+  const per=(F.mes?MESES_ABR[F.mes-1]+"/":"")+(F.ano||"todo o período");
+  const abas=[["geral","Visão geral"],["capt","Captação"],["loc","Locação"],["fec","Fechamento"],["vis","Vistoria"],["ren","Renovação e reajuste"],["corr","Corretores e equipes"]];
+  let h=`<div class="ilfil">
+    <label class="f">Ano<select class="sel" data-ilf="ano"><option value="0">Todos</option>${anos.map(a=>`<option ${F.ano===a?"selected":""}>${a}</option>`).join("")}</select></label>
+    <label class="f">Mês<select class="sel" data-ilf="mes"><option value="0">Todos</option>${MESES_ABR.map((m,i)=>`<option value="${i+1}" ${F.mes===i+1?"selected":""}>${m}</option>`).join("")}</select></label>
+    <label class="f">Equipe<select class="sel" data-ilf="time"><option value="">Todas</option>${TIMES_LOC.map(t=>`<option ${F.time===t?"selected":""}>${t}</option>`).join("")}</select></label>
+    <label class="f">Corretor<select class="sel" data-ilf="corr"><option value="">Todos</option>${[...todosCorr.values()].sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR")).map(c=>`<option value="${esc(c.id)}" ${F.corr===c.id?"selected":""}>${esc(c.nome)}${c.ativo?"":" (inativo)"}</option>`).join("")}</select></label>
+    <label class="f">Região<select class="sel" data-ilf="reg"><option value="">Todas</option>${regs.map(r=>`<option value="${esc(r)}" ${F.reg===r?"selected":""}>${esc(regNome(r))}</option>`).join("")}</select></label>
+    <button class="btn" type="button" id="ilAtual" title="Ler a planilha de novo">Atualizar</button></div>
+  <div class="iltabs" role="tablist">${abas.map(([k,t])=>`<button type="button" role="tab" data-ilaba="${k}" aria-selected="${F.aba===k}">${t}</button>`).join("")}</div>
+  <p class="note ilsub">Período: <b>${esc(per)}</b> · dados da planilha Locações, lidos ${esc(dt(D.lidoEm))}</p>`;
+  const entradasVis=vis.filter(v=>v.tipo==="ENTRADA").length,saidasVis=vis.filter(v=>/SA/.test(v.tipo)).length,pendVis=vis.filter(v=>v.pend==="COM").length;
+  if(F.aba==="geral"){
+    h+=`<div class="ilkpis">${ilKpi("Imóveis captados",adm.length,"para administração")}${ilKpi("Valor captado",brl0(vadm),"soma dos aluguéis","ouro")}${ilKpi("Imóveis locados",loc.length,"contratos novos")}${ilKpi("VGL",brl0(vgl),"valor geral locado","ouro")}${ilKpi("Ticket médio",brl0(loc.length?vgl/loc.length:0),"aluguel médio")}${ilKpi("Fechamentos",fec.length,"imóveis devolvidos")}</div>
+    <div class="ilg2">${ilPan("Visão consolidada por mês","Captações, locações e fechamentos",ilBarras([{nome:"Captações",cor:"#6B7A99",vals:porMes(adm,meses)},{nome:"Locações",cor:"#0B1628",vals:porMes(loc,meses)},{nome:"Fechamentos",cor:"#C1652F",vals:porMes(fec,meses)}],meses))}
+    ${ilPan("Contratos por garantia","Locações do período",ilSeg(contar(loc,r=>garN(r.gar))))}</div>
+    <div class="ilg2">${ilPan("Top 3 · Captação","Imóveis captados",ilRank(contar(adm,nomeC),null,3))}${ilPan("Top 3 · Locação","Imóveis locados",ilRank(contar(loc,nomeC),null,3))}</div>
+    <div class="ilg2">${ilPan("Desempenho por equipe","Captações + locações",ilRank(contar([...adm,...loc],timeC)))}${ilPan("Imóveis por região","Captados e locados",ilRank(contar([...adm,...loc],r=>String(r.reg||"").trim()||"Não informada")))}</div>`}
+  if(F.aba==="capt"){
+    h+=`<div class="ilkpis">${ilKpi("Imóveis captados",adm.length,"para administração")}${ilKpi("Valor captado",brl0(vadm),"soma dos aluguéis","ouro")}${ilKpi("Aluguel médio",brl0(adm.length?vadm/adm.length:0),"por imóvel")}${ilKpi("Com vistoria de entrada",adm.filter(r=>r.vist==="SIM").length,"na captação")}</div>
+    <div class="ilg2">${ilPan("Captações por mês","",ilBarras([{nome:"Captações",cor:"#0B1628",vals:porMes(adm,meses)}],meses))}${ilPan("Valor captado por mês","Soma dos aluguéis (R$)",ilBarras([{nome:"R$",cor:"#C1652F",vals:somaMes(adm,meses,r=>r.val)}],meses))}</div>
+    <div class="ilg2">${ilPan("Ranking de captações","Imóveis por corretor",ilRank(contar(adm,nomeC),null,15))}${ilPan("Captações por equipe","",ilSeg(contar(adm,timeC)))}</div>
+    ${ilPan("Imóveis captados por região","",ilRank(contar(adm,r=>String(r.reg||"").trim()||"Não informada"),null,12))}`}
+  if(F.aba==="loc"){const seg=loc.filter(r=>/PAGO|CONTRATAD/i.test(r.seg)).length;
+    h+=`<div class="ilkpis">${ilKpi("Imóveis locados",loc.length,"contratos novos")}${ilKpi("VGL",brl0(vgl),"valor geral locado","ouro")}${ilKpi("Ticket médio",brl0(loc.length?vgl/loc.length:0),"aluguel médio")}${ilKpi("Garantias (valor)",brl0(loc.reduce((s,r)=>s+r.vgar,0)),"caução, fiança e capitalização")}${ilKpi("Seguro incêndio",seg+" de "+loc.length,"pago ou contratado")}</div>
+    <div class="ilg2">${ilPan("Locações por mês","",ilBarras([{nome:"Locações",cor:"#0B1628",vals:porMes(loc,meses)}],meses))}${ilPan("VGL por mês","Soma dos aluguéis locados (R$)",ilBarras([{nome:"R$",cor:"#C1652F",vals:somaMes(loc,meses,r=>r.val)}],meses))}</div>
+    <div class="ilg2">${ilPan("Ranking de locações","Contratos por corretor",ilRank(contar(loc,nomeC),null,15))}${ilPan("VGL por corretor","",ilRank(somar(loc,nomeC,r=>r.val),brl,15))}</div>
+    <div class="ilg2">${ilPan("Contratos por garantia","",ilSeg(contar(loc,r=>garN(r.gar))))}${ilPan("Locações por equipe","",ilSeg(contar(loc,timeC)))}</div>
+    ${ilPan("Imóveis locados por região","",ilRank(contar(loc,r=>String(r.reg||"").trim()||"Não informada"),null,12))}`}
+  if(F.aba==="fec"){
+    h+=`<div class="ilkpis">${ilKpi("Fechamentos",fec.length,"imóveis devolvidos")}${ilKpi("Voltam para locação",fec.filter(r=>/LOCA/i.test(semAcento(r.acao))).length,"anúncio de locação")}${ilKpi("Vão para venda",fec.filter(r=>/VENDA/i.test(semAcento(r.acao))).length,"anúncio de venda")}${ilKpi("Devolvidos ao proprietário",fec.filter(r=>/DEVOLV/i.test(semAcento(r.acao))).length,"saem da carteira")}</div>
+    <div class="ilg2">${ilPan("Comparativo mensal · entrada × saída","Locações novas e fechamentos",ilBarras([{nome:"Entradas (locações)",cor:"#0B1628",vals:porMes(loc,meses)},{nome:"Saídas (fechamentos)",cor:"#C1652F",vals:porMes(fec,meses)}],meses))}
+    ${ilPan("Destino do imóvel","Depois do fechamento",ilSeg(contar(fec,r=>String(r.acao||"").trim()||"Não informado")))}</div>
+    ${ilPan("Garantias no fechamento","",ilSeg(contar(fec,r=>garN(r.gar))))}`}
+  if(F.aba==="vis"){
+    h+=`<div class="ilkpis">${ilKpi("Vistorias",vis.length,"no período")}${ilKpi("De entrada",entradasVis,"novos inquilinos")}${ilKpi("De saída",saidasVis,"encerramentos")}${ilKpi("Com pendência",pendVis,vis.length?Math.round(pendVis/vis.length*100)+"% das vistorias":"","alerta")}</div>
+    <div class="ilg2">${ilPan("Vistorias por mês","Entrada e saída",ilBarras([{nome:"Entrada",cor:"#0B1628",vals:porMes(vis.filter(v=>v.tipo==="ENTRADA"),meses)},{nome:"Saída",cor:"#C1652F",vals:porMes(vis.filter(v=>/SA/.test(v.tipo)),meses)}],meses))}
+    ${ilPan("Pendências","",ilSeg(contar(vis,v=>v.pend==="COM"?"Com pendência":v.pend==="SEM"?"Sem pendência":"Não informado")))}</div>`}
+  if(F.aba==="ren"){const renSim=ren.filter(r=>r.renov==="SIM"),reaSim=rea.filter(r=>r.reaj==="SIM");
+    const difRen=renSim.reduce((s,r)=>s+((r.vAcord||r.vProp)-r.vAtual>0&&r.vAtual?(r.vAcord||r.vProp)-r.vAtual:0),0),difRea=reaSim.reduce((s,r)=>s+(r.vNovo&&r.vAtual?r.vNovo-r.vAtual:0),0);
+    h+=`<div class="ilkpis">${ilKpi("Contratos para renovar",ren.length,"no período")}${ilKpi("Renovados",renSim.length,ren.length?Math.round(renSim.length/ren.length*100)+"%":"")}${ilKpi("Ganho nas renovações",brl0(difRen),"por mês","ouro")}${ilKpi("Reajustes aplicados",reaSim.length+" de "+rea.length,"")}${ilKpi("Ganho nos reajustes",brl0(difRea),"por mês","ouro")}</div>
+    <div class="ilg2">${ilPan("Renovações por mês","",ilBarras([{nome:"Para renovar",cor:"#6B7A99",vals:porMes(ren,meses)},{nome:"Renovados",cor:"#0B1628",vals:porMes(renSim,meses)}],meses))}${ilPan("Reajustes por mês","",ilBarras([{nome:"Reajustes",cor:"#C1652F",vals:porMes(rea,meses)}],meses))}</div>`}
+  if(F.aba==="corr"){const semCad=new Map();[...D.adm,...D.loc].forEach(r=>{const c=corrLoc(r.corr);if(c.semCadastro)semCad.set(c.id,{c,raw:String(r.corr).trim()})});
+    const tab=[...todosCorr.values()].map(c=>({c,cap:adm.filter(r=>corrLoc(r.corr).id===c.id).length,loc:loc.filter(r=>corrLoc(r.corr).id===c.id).length,vgl:loc.filter(r=>corrLoc(r.corr).id===c.id).reduce((s,r)=>s+r.val,0)})).filter(x=>x.cap||x.loc).sort((a,b)=>(b.cap+b.loc)-(a.cap+a.loc));
+    h+=`${ilPan("Desempenho dos corretores","Período filtrado · * = nome da planilha ainda sem cadastro",`<div class="tblwrap"><table class="iltab"><thead><tr><th>#</th><th>Corretor</th><th>Equipe</th><th class="n">Captações</th><th class="n">Locações</th><th class="n">VGL</th></tr></thead><tbody>${tab.map((x,i)=>`<tr class="${x.c.ativo?"":"inat"}"><td>${i+1}</td><td>${esc(x.c.nome)}${x.c.semCadastro?" *":x.c.ativo?"":` <span class="nivtag">inativo</span>`}</td><td>${esc(x.c.time||"—")}</td><td class="n">${x.cap}</td><td class="n">${x.loc}</td><td class="n">${brl0(x.vgl)}</td></tr>`).join("")}</tbody></table></div>`)}
+    ${semCad.size?ilPan("Nomes da planilha sem cadastro","Ligue cada nome ao corretor certo. Quem não está no cadastro continua aparecendo com o nome da planilha.",`<div class="illig">${[...semCad.values()].map(x=>`<label class="f"><span>${esc(x.raw)}</span><select class="sel" data-illig="${esc(chaveNome(x.raw))}"><option value="">Manter como está</option>${[...S.corr].sort((a,b)=>a[1].nome.localeCompare(b[1].nome,"pt-BR")).map(([id,c])=>`<option value="${id}">${esc(c.nome)}${c.ativo===false?" (inativo)":""}</option>`).join("")}</select></label>`).join("")}</div>`):""}
+    ${ilPan("Equipes","A equipe de cada corretor se ajusta em Equipe e acessos › editar",TIMES_LOC.map(t=>`<div class="iltime"><b>${t}</b><span>${[...todosCorr.values()].filter(c=>c.time===t).map(c=>esc(c.nome)+(c.ativo?"":" (inativo)")).join(" · ")||"—"}</span></div>`).join(""))}`}
+  box.innerHTML=h;
+  box.querySelectorAll("[data-ilf]").forEach(el=>el.onchange=()=>{const k=el.dataset.ilf;F[k]=["ano","mes"].includes(k)?Number(el.value):el.value;renderIndLoc()});
+  box.querySelectorAll("[data-ilaba]").forEach(b=>b.onclick=()=>{F.aba=b.dataset.ilaba;renderIndLoc()});
+  $("#ilAtual").onclick=()=>carregarLoc(true);
+  box.querySelectorAll("[data-illig]").forEach(el=>el.onchange=async()=>{if(!el.value)return;const m={...(S.locAlias||{}),[el.dataset.illig]:el.value};
+    try{await db.doc("cfg/locAlias").set({mapa:m});S.locAlias=m;toast("Nome ligado ao cadastro");renderIndLoc()}catch(e){toast(writeErr(e))}})}
+
 function renderInd(){
   if(!S.ready||!$("#indBox"))return;
   const per=$("#indPer").value;$("#indDeL").hidden=$("#indAteL").hidden=per!=="pers";
@@ -2121,17 +2265,17 @@ function renderInd(){
   const vol=L.reduce((a,c)=>a+c.valor,0),comV=L.filter(c=>c.valor>0),tk=comV.length?vol/comV.length:0;
   const agrupa=k=>{const m=new Map();L.forEach(c=>{const x=m.get(c[k])||{n:0,v:0};x.n++;x.v+=c.valor;m.set(c[k],x)});return [...m.entries()].sort((a,b)=>b[1].n-a[1].n||b[1].v-a[1].v)};
   const reg=agrupa("bairro"),cor=agrupa("captador");
-  const barras=(lst,max)=>lst.length?`<div class="barl">${lst.map(([n,x])=>`<div class="bar"><span class="nm" title="${esc(n)}">${esc(n)}</span><span class="tr"><i style="width:${Math.max(4,Math.round(x.n/max*100))}%"></i></span><span class="vl"><b>${x.n}</b> · ${esc(brl(Math.round(x.v)))}</span></div>`).join("")}</div>`:`<p class="s">Nenhuma captação no período.</p>`;
+  const barras=(lst,max)=>lst.length?`<div class="barl">${lst.map(([n,x])=>`<div class="bar"><span class="nm" title="${esc(n)}">${esc(n)}</span><span class="tr"><i style="width:${Math.max(4,Math.round(x.n/max*100))}%"></i></span><span class="vl"><b>${x.n}</b> · ${esc(brl0(Math.round(x.v)))}</span></div>`).join("")}</div>`:`<p class="s">Nenhuma captação no período.</p>`;
   const fl=S.indFin==="locacao"?"aluguel":"venda";
   const fmtD=x=>x.split("-").reverse().join("/");
   $("#indBox").innerHTML=`<div class="kpis">
       <div class="kpi"><span>Captações</span><b>${L.length}</b><small>${per==="tudo"?"todo o período":esc(fmtD(de))+" a "+esc(fmtD(ate))}</small></div>
-      <div class="kpi"><span>Volume total</span><b>${esc(brl(Math.round(vol)))}</b><small>soma dos valores de ${fl}</small></div>
-      <div class="kpi"><span>Ticket médio</span><b>${esc(brl(Math.round(tk)))}</b><small>valor médio por imóvel</small></div>
+      <div class="kpi"><span>Volume total</span><b>${esc(brl0(Math.round(vol)))}</b><small>soma dos valores de ${fl}</small></div>
+      <div class="kpi"><span>Ticket médio</span><b>${esc(brl0(Math.round(tk)))}</b><small>valor médio por imóvel</small></div>
       <div class="kpi"><span>Regiões</span><b>${reg.length}</b><small>${reg[0]?"mais captada: "+esc(reg[0][0]):"—"}</small></div></div>
     <div class="indg"><div class="indp"><h3>Captações por região</h3>${barras(reg,reg[0]?.[1].n||1)}</div>
     ${S.master&&!cs.value?`<div class="indp"><h3>Captações por corretor</h3>${barras(cor,cor[0]?.[1].n||1)}</div>`:""}</div>
-    <div class="indp"><h3>Imóveis captados no período</h3>${L.length?`<div class="tblwrap"><table><thead><tr><th>Data</th><th>Imóvel</th><th>Região</th><th>Captador</th><th>Valor de ${fl}</th><th>Situação</th></tr></thead><tbody>${L.sort((a,b)=>b.dia.localeCompare(a.dia)).map(c=>`<tr><td>${esc(fmtD(c.dia))}</td><td>${esc(c.rot)}<div class="s">${esc(c.codigo)}</div></td><td>${esc(c.bairro)}</td><td>${esc(c.captador)}</td><td>${esc(c.valor?brl(c.valor):"—")}</td><td class="s">${c.arq?"Baixado":esc((STATUS[c.status]||STATUS.indisponivel)[0])}</td></tr>`).join("")}</tbody></table></div>`:`<p class="s">Nenhuma captação no período escolhido.</p>`}</div>`;
+    <div class="indp"><h3>Imóveis captados no período</h3>${L.length?`<div class="tblwrap"><table><thead><tr><th>Data</th><th>Imóvel</th><th>Região</th><th>Captador</th><th>Valor de ${fl}</th><th>Situação</th></tr></thead><tbody>${L.sort((a,b)=>b.dia.localeCompare(a.dia)).map(c=>`<tr><td>${esc(fmtD(c.dia))}</td><td>${esc(c.rot)}<div class="s">${esc(c.codigo)}</div></td><td>${esc(c.bairro)}</td><td>${esc(c.captador)}</td><td>${esc(c.valor?brl0(c.valor):"—")}</td><td class="s">${c.arq?"Baixado":esc((STATUS[c.status]||STATUS.indisponivel)[0])}</td></tr>`).join("")}</tbody></table></div>`:`<p class="s">Nenhuma captação no período escolhido.</p>`}</div>`;
 }
 document.addEventListener("change",e=>{if(e.target.closest("#indPer,#indDe,#indAte,#indCorr"))renderInd()});
 document.addEventListener("click",e=>{const b=e.target.closest("#indFin button");if(b){S.indFin=b.dataset.f;renderInd()}});
@@ -2270,11 +2414,13 @@ function renomearCorr(id){
   <div class="bd"><label class="f">Nome e sobrenome<input class="inp" id="rn_nome" value="${esc(c.nome)}"></label>
   <label class="f">Função<select class="sel" id="rn_tipo">${TIPO_OPTS.map(([k,v])=>`<option value="${k}" ${(c.tipo||"corretor")===k?"selected":""}>${v}</option>`).join("")}</select></label>
   <label class="f">Acesso ao sistema<select class="sel" id="rn_nivel">${Object.entries(NIVEL_LBL).map(([k,v])=>`<option value="${k}" ${nivelDe(c)===k?"selected":""}>${v}</option>`).join("")}</select></label>
+  <label class="f">Equipe (locação)<select class="sel" id="rn_time"><option value="">Sem equipe</option>${TIMES_LOC.map(t=>`<option ${(c.time||LOC_TIME_PADRAO[id]||"")===t?"selected":""}>${t}</option>`).join("")}</select></label>
   <label class="chkl"><input type="checkbox" id="rn_contr" ${c.contratos?"checked":""}> Secretaria de Vendas (acesso ao Painel de fichas e à planilha)</label>
   <p class="note" style="margin:0"><b>Master</b>: tudo, inclusive indicadores e gestão. <b>Colaborador</b>: área do corretor, operação e contratos. <b>Corretor</b>: só a área do corretor.</p><p class="note">O nome também é atualizado nos imóveis em que ele é captador, nas chaves que estão com ele e no histórico de retiradas.</p><p class="err" id="rnErr"></p></div>
   <footer><button class="btn" data-close-btn>Cancelar</button><button class="btn pri" id="rnOk">Salvar</button></footer>`},()=>{
     $("#rnOk").onclick=async()=>{const novo=nomePessoa($("#rn_nome").value);const velho=c.nome;const tipo=$("#rn_tipo").value;const acesso=$("#rn_nivel").value;
       if(!novo){$("#rnErr").textContent="Informe o nome.";return}
+      const tm=$("#rn_time").value;if(tm!==(c.time||"")){try{await db.doc("corretores/"+id).update({time:tm})}catch(e){$("#rnErr").textContent=writeErr(e);return}}
       const contr=$("#rn_contr").checked;if(contr!==!!c.contratos){try{await db.doc("corretores/"+id).update({contratos:contr});logEv("corretor_nome",{corretor:c.nome,detalhe:"Secretaria de Vendas: "+(contr?"liberado":"retirado")})}catch(e){$("#rnErr").textContent=writeErr(e);return}}
       if(acesso!==nivelDe(c)){try{await db.doc("corretores/"+id).update({acesso});logEv("corretor_nome",{corretor:c.nome,detalhe:"Acesso: "+NIVEL_LBL[acesso]})}catch(e){$("#rnErr").textContent=writeErr(e);return}}
       if(novo===velho){if(tipo!==(c.tipo||"corretor")){try{await db.doc("corretores/"+id).update({tipo});logEv("corretor_nome",{corretor:novo,detalhe:"Tipo: "+TIPO_LBL[tipo]});closeModal();toast("Cadastro atualizado")}catch(e){$("#rnErr").textContent=writeErr(e)}}else closeModal();return}
@@ -3554,10 +3700,10 @@ $("#btnPin").onclick=()=>changePin("pin");$("#btnPinSt").onclick=()=>changePin("
 $("#btnAddCorr").onclick=async()=>{const n=nomePessoa($("#novoCorr").value);if(!n)return;
   if(corrList(true).some(x=>x.toLowerCase()===n.toLowerCase())){toast("Esse corretor já está na lista");return}
   try{await db.collection("corretores").doc().set({nome:n,ativo:true,tipo:$("#novoTipo").value});logEv("corretor_in",{corretor:n,detalhe:TIPO_LBL[$("#novoTipo").value]});$("#novoCorr").value="";toast(TIPO_LBL[$("#novoTipo").value].replace(" PSI","")+" incluído")}catch(err){toast(writeErr(err))}};
-const SUBT={fpainel:"Painel de fichas",fvend:"Ficha do vendedor",fvenda:"Fichas · Venda",os:"OS · Ordem de serviço",pres:"Check-in de presença",aut:"Autorização de venda",ind:"Indicadores de captação",agenda:"Agenda de visitas",plantao:"Plantão de corretores",cad:"Cadastros de acesso",fora:"Chaves fora",hist:"Histórico",corr:"Corretores",caut:"Chaves em cautela",arq:"Baixados"};
-function setView(v){if(S.sessao&&!S.full&&["ind","fora","hist","corr","arq","caut","cad"].includes(v))v="home";if(v!=="plantao"&&S.plPrev){S.plPrev=false;S.plantao=S.plantaoReal||S.plantao}const sub=!!SUBT[v];document.documentElement.classList.toggle("subtela",sub);$("#subTitulo").textContent=SUBT[v]||"";document.documentElement.classList.toggle("inicio",v==="home");if(sub||v==="home")window.scrollTo({top:0});if(v==="home"&&S.ready)renderHome();if(v==="agenda"&&S.ready)renderAgenda();if(v==="pres"&&S.ready)renderPres();if(v==="fpainel"&&!podePainelFichas())v="home";if(v==="fvend")prepFicha();if(v==="fpainel")renderFPainel();if(v==="os"&&S.ready)renderOS();if(v==="ind"&&S.ready)renderInd();if(v==="aut")prepAut();
+const SUBT={indloc:"Indicadores de locação",fpainel:"Painel de fichas",fvend:"Ficha do vendedor",fvenda:"Fichas · Venda",os:"OS · Ordem de serviço",pres:"Check-in de presença",aut:"Autorização de venda",ind:"Indicadores de captação",agenda:"Agenda de visitas",plantao:"Plantão de corretores",cad:"Cadastros de acesso",fora:"Chaves fora",hist:"Histórico",corr:"Corretores",caut:"Chaves em cautela",arq:"Baixados"};
+function setView(v){if(S.sessao&&!S.full&&["ind","indloc","fora","hist","corr","arq","caut","cad"].includes(v))v="home";if(v!=="plantao"&&S.plPrev){S.plPrev=false;S.plantao=S.plantaoReal||S.plantao}const sub=!!SUBT[v];document.documentElement.classList.toggle("subtela",sub);$("#subTitulo").textContent=SUBT[v]||"";document.documentElement.classList.toggle("inicio",v==="home");if(sub||v==="home")window.scrollTo({top:0});if(v==="home"&&S.ready)renderHome();if(v==="agenda"&&S.ready)renderAgenda();if(v==="pres"&&S.ready)renderPres();if(v==="fpainel"&&!podePainelFichas())v="home";if(v==="fvend")prepFicha();if(v==="fpainel")renderFPainel();if(v==="os"&&S.ready)renderOS();if(v==="ind"&&S.ready)renderInd();if(v==="indloc"&&S.ready)renderIndLoc();if(v==="aut")prepAut();
   if(v==="loc"||v==="ven"){document.documentElement.dataset.fin=v;$("#btnNovoTop").dataset.new=v==="ven"?"venda":"locacao";if(S.ready)renderStats()}document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.v===v));
-  ["home","aut","ind","agenda","loc","ven","fora","hist","corr","arq","caut","cad","plantao","pres","os","fvenda","fvend","fpainel"].forEach(x=>$("#v-"+x).hidden=x!==v);try{localStorage.setItem("qc_view2",v)}catch{}}
+  ["home","aut","ind","indloc","agenda","loc","ven","fora","hist","corr","arq","caut","cad","plantao","pres","os","fvenda","fvend","fpainel"].forEach(x=>$("#v-"+x).hidden=x!==v);try{localStorage.setItem("qc_view2",v)}catch{}}
 try{const v=localStorage.getItem("qc_view2");if((v==="loc"||v==="ven")&&!(SO_LOCACAO&&v==="ven"))document.documentElement.dataset.fin=v}catch{}
 (function(){let t="light";try{t=localStorage.getItem("qc_tema")||"light"}catch{}document.documentElement.dataset.theme=t;
   const b=$("#btnTema");const upd=()=>b&&b.setAttribute("aria-label",document.documentElement.dataset.theme==="dark"?"Mudar para o modo claro":"Mudar para o modo escuro");upd();
@@ -3568,7 +3714,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-11-05-v85";
+const VERSAO_PAINEL="2026-11-05-v86";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
@@ -3644,6 +3790,7 @@ function ligarEscutas(){
   db.collection("avisos").onSnapshot(s=>{S.avisos=s.docs.map(d=>({id:d.id,...d.data()}));renderHome()},onErr);
   db.collection("aniversarios").onSnapshot(s=>{S.aniv=s.docs.map(d=>d.data());renderHome()},onErr);
   db.collection("seg").onSnapshot(s=>{S.seg=new Map(s.docs.map(d=>[d.id,d.data()]));schedule()},onErr);
+  db.doc("cfg/locAlias").onSnapshot(s=>{S.locAlias=s.exists?(s.data().mapa||{}):{};if(!$("#v-indloc").hidden&&S.loc)renderIndLoc()},()=>{});
   db.doc("cfg/pin").onSnapshot(s=>{S.pin=s.exists?s.data().pin:null},onErr);
   db.doc("cfg/pinStatus").onSnapshot(s=>{S.pinStatus=s.exists?s.data().pin:null},onErr);
 }
