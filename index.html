@@ -559,6 +559,7 @@ html:not(.fichasac) .fpTile{display:none!important}
 .fph{display:flex;gap:10px;justify-content:space-between;align-items:flex-start}.fph>div{display:grid;gap:2px;min-width:0}.fptag{justify-self:start;font-size:.7rem;font-weight:700;background:#eef0f5;color:#0B1628;border-radius:999px;padding:2px 8px;vertical-align:2px}
 .fpdocs{display:flex;flex-wrap:wrap;gap:6px}.fpdoc{font:600 .78rem/1.2 inherit;border-radius:999px;padding:5px 10px;text-decoration:none;border:1px solid}
 .fpdoc.nao{color:#6B7A99;border-color:#dfe3ea;background:transparent}.fptag.aut{background:#f3e7d6;color:#6F4E37}
+.flwa{display:flex;justify-content:center;width:100%;font-size:1rem;padding:14px 16px;margin:4px 0 2px}
 .fmsg{font:inherit;font-size:.9rem;line-height:1.45;resize:vertical;min-height:120px}.flenv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end}@media(max-width:520px){.flenv{grid-template-columns:1fr}}
 .fpdoc.ok{color:#1e6b3a;border-color:#bfe3cc;background:#eefaf2}.fpdoc.falta{color:#B3261E;border-color:#f1c2bd;background:#fdeceb;cursor:pointer}.fpdoc.falta:hover{background:#B3261E;color:#fff}
 @media(max-width:720px){.fpkpi{grid-template-columns:repeat(2,minmax(0,1fr))}.fph{flex-direction:column}.fptop{display:grid}.fpfil{display:grid;grid-template-columns:1fr 1fr}.fpfil .inp{grid-column:1/-1}.fpfil .sel:last-child{grid-column:1/-1}}
@@ -1049,10 +1050,10 @@ label.f .inp,label.f .sel{color:var(--fg);font-size:.9rem;width:100%}
   <section id="v-fvenda" hidden>
     <p class="note">Escolha a ficha.</p>
     <div class="hgrid fvgrid">
-      <button class="mtile" type="button" data-goto="aut"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 17c1.5-2 2.5-2 3.5 0s2 2 3.5 0"/></svg></span><span class="mk">Venda · proprietário</span><b>Autorização de venda</b><span class="md">Condições, link para o proprietário, assinatura e envio.</span></button>
-      <button class="mtile" type="button" data-goto="fvend" data-ftipo="comprador"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M17 8h5M19.5 5.5v5"/></svg></span><span class="mk">Venda · comprador</span><b>Ficha do comprador</b><span class="md">Dados do promitente comprador para o contrato de compra e venda.</span></button>
-      <button class="mtile" type="button" data-goto="fvend" data-ftipo="vendedor"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M15 12l2 2 4-4"/></svg></span><span class="mk">Venda · vendedor</span><b>Ficha do vendedor</b><span class="md">Dados do promitente vendedor para o contrato de compra e venda.</span></button>
-      <button class="mtile fpTile" type="button" data-goto="fpainel"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="mk">Secretaria de Vendas</span><b>Painel de fichas</b><span class="md">Fichas recebidas por dia, documentos faltando e cobrança.</span></button>
+      <button class="mtile" type="button" data-goto="aut"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 17c1.5-2 2.5-2 3.5 0s2 2 3.5 0"/></svg></span><span class="mk">Venda · proprietário</span><b>Autorização<br>de venda</b><span class="md">Condições, link para o proprietário, assinatura e envio.</span></button>
+      <button class="mtile" type="button" data-goto="fvend" data-ftipo="comprador"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M17 8h5M19.5 5.5v5"/></svg></span><span class="mk">Venda · comprador</span><b>Ficha do<br>comprador</b><span class="md">Dados do promitente comprador para o contrato de compra e venda.</span></button>
+      <button class="mtile" type="button" data-goto="fvend" data-ftipo="vendedor"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M15 12l2 2 4-4"/></svg></span><span class="mk">Venda · vendedor</span><b>Ficha do<br>vendedor</b><span class="md">Dados do promitente vendedor para o contrato de compra e venda.</span></button>
+      <button class="mtile fpTile" type="button" data-goto="fpainel"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="mk">Secretaria de Vendas</span><b>Painel<br>de fichas</b><span class="md">Fichas recebidas por dia, documentos faltando e cobrança.</span></button>
     </div>
   </section>
   <section id="v-fvend" hidden>
@@ -1063,7 +1064,7 @@ label.f .inp,label.f .sel{color:var(--fg);font-size:.9rem;width:100%}
         <label class="f">E-mail do corretor *<input class="inp" id="fv_cmail" type="email" inputmode="email" placeholder="Para receber a ficha"></label>
         <label class="f" style="grid-column:1/-1"><span id="fvCliL">Nome do cliente</span><input class="inp" id="fv_cnome" placeholder="Para personalizar a mensagem"></label>
         <label class="f">E-mail do cliente<input class="inp" id="fv_cemail" type="email" inputmode="email" placeholder="Para enviar o link por e-mail"></label>
-        <label class="f">WhatsApp do cliente<input class="inp" id="fv_ctel" inputmode="tel" placeholder="(61) 90000-0000"></label></div>
+        <label class="f">WhatsApp do cliente *<input class="inp" id="fv_ctel" inputmode="tel" placeholder="(61) 90000-0000"></label></div>
         <div class="autescolha">
           <button type="button" class="btn pri autbig" id="fvLink">Enviar para o vendedor preencher</button>
           <span class="note" id="fvNota"></span>
@@ -1822,7 +1823,7 @@ function fichaSchema(tipo){const v=tipo==="vendedor",q=v?"vendedor":"comprador";
   {k:"cj_cpf",l:"CPF do cônjuge",t:"cpf",casado:1,req:1},{k:"cj_rg",l:"RG do cônjuge",casado:1,req:1},
   {k:"cj_prof",l:"Profissão do cônjuge",casado:1},{k:"cj_nac",l:"Nacionalidade do cônjuge",casado:1},
   {k:"cj_email",l:"E-mail do cônjuge",t:"email",casado:1,full:1},
-  {sec:"Documentos",doc:1,nota:"Anexe fotos ou PDF (até 5 arquivos em cada). Se ainda não tiver algum documento, pode enviar a ficha assim mesmo e mandar depois pelo mesmo link."},
+  {sec:"Documentos",doc:1,nota:"Obrigatório: anexe fotos ou PDF dos documentos (até 5 arquivos em cada)."},
   {k:"ax_doc",l:"Documento pessoal (RG ou CNH)",t:"file",req:1,full:1},
   ...(v?[{k:"ax_end",l:"Comprovante de endereço",t:"file",req:1,full:1}]:[]),
   {k:"ax_cas",l:"Certidão de casamento ou escritura de união estável",t:"file",casado:1,req:1,full:1},
@@ -1861,7 +1862,7 @@ async function fichaAnexos(files){const out=[];for(const x of files){const a=awa
 // envio comum (sistema e link): confere, avisa o que falta, gera o PDF e manda
 async function fichaSubmeter(o){const sch=fichaSchema(o.tipo);const r=fichaLer(o.root,sch);const er=fichaValida(sch,r);const b=o.btn,lbl=o.lbl;
   o.err.textContent=er;o.err.classList.remove("aviso");if(er){b.dataset.conf="";b.textContent=lbl;return}
-  if(r.falta.length&&b.dataset.conf!=="1"){o.err.innerHTML=`<b>Faltam documentos:</b> ${esc(r.falta.map(f=>f.l).join(", "))}. Pode enviar agora e mandar depois pelo mesmo link.`;o.err.classList.add("aviso");b.dataset.conf="1";b.textContent="Enviar assim mesmo";return}
+  if(r.falta.length){o.err.innerHTML=`<b>Anexe os documentos obrigatórios:</b> ${esc(r.falta.map(f=>f.l).join(", "))}.`;o.err.classList.add("aviso");o.root.querySelector(`[data-fk="${r.falta[0].k}"]`)?.scrollIntoView({behavior:"smooth",block:"center"});return}
   b.disabled=true;b.textContent="Gerando a ficha…";
   try{const ax={};r.files.forEach(x=>(ax[x.campo]=ax[x.campo]||[]).push({nome:x.file.name}));
     const rec={tipo:o.tipo,ref:o.ref||"",corretor:o.corretor||"",dados:r.d,anexos:ax,recebidaEm:nowISO()};
@@ -1875,7 +1876,7 @@ function prepFicha(){const tipo=S.fichaTipo||"vendedor",I=FICHA_INFO[tipo];$("#s
   if($("#fvForm").dataset.tipo!==tipo){$("#fvForm").innerHTML=fichaHtml(fichaSchema(tipo));$("#fvForm").dataset.tipo=tipo;if(!$("#fvForm").dataset.lig){fichaLigar($("#fvForm"));$("#fvForm").dataset.lig=1}
     $("#fvForm").hidden=true;$("#fvActs").hidden=true;$("#fvJunto").hidden=false;$("#fvErr").textContent=""}
   $("#fvIntro").textContent=I.intro;$("#fvLink").textContent=`Enviar para o ${I.quem} preencher`;$("#fvJunto").textContent=`Preencher junto com o ${I.quem} agora`;
-  $("#fvNota").textContent=`O ${I.quem} recebe um link (vale 10 dias), preenche os dados, anexa os documentos e envia. Você, o ${I.quem} e a Secretaria de Vendas recebem a ficha em PDF.`;
+  $("#fvNota").textContent=`O ${I.quem} recebe o link no WhatsApp (vale 10 dias), preenche os dados, anexa os documentos obrigatórios e envia. Você, o ${I.quem} e a Secretaria de Vendas recebem a ficha em PDF.`;
   const eu=S.sessao?.nome||"";const c=[...(S.contatos||new Map()).values()].find(x=>semAcento(x.nome)===semAcento(eu));
   if(c?.email&&!$("#fv_cmail").value)$("#fv_cmail").value=c.email;
   renderFichaLista()}
@@ -1892,8 +1893,9 @@ function renderFichaLista(){const el=$("#fvLista");if(!el)return;const tipo=S.fi
       <div class="oscb">${st==="aguardando"?`<button class="btn sm" type="button" data-fvlink="${esc(r.id)}">Link</button>`:""}${st==="pendente"?`<button class="btn sm" type="button" data-fpfalta="${esc(r.id)}">Cobrar documentos</button>`:""}${r.dados?`<button class="btn sm pri" type="button" data-fvdoc="${esc(r.id)}">Ver ficha</button>`:""}</div></div>`}).join("")}</div>`}
 const fichaUrl=t=>location.origin+location.pathname+"?ficha="+encodeURIComponent(t);
 const LINK_DIAS=10; // validade dos links (igual ao servidor)
+const fmtTelFicha=t=>{t=String(t).replace(/\D/g,"").replace(/^55(?=\d{10,11}$)/,"");return t.length===11?`(${t.slice(0,2)}) ${t.slice(2,7)}-${t.slice(7)}`:t.length===10?`(${t.slice(0,2)}) ${t.slice(2,6)}-${t.slice(6)}`:t};
 function fichaMsg(r,url){const I=FICHA_INFO[r.tipo||"vendedor"];const pn=String(r.clienteNome||"").trim().split(" ")[0];
-  return `Olá${pn?", "+pn:""}! Aqui é ${r.corretor||"a equipe"}, da Park Sul Imóveis.\n\nEsta é a sua ficha de ${I.quem}, com as informações necessárias para a elaboração do contrato de compra e venda${r.ref?` do imóvel ${r.ref}`:""}. Preencha os seus dados e anexe os documentos por este link:\n${url}\n\nO link vale por ${LINK_DIAS} dias, até ${dt(r.expira).slice(0,10)}.`}
+  return `Olá${pn?", "+pn:""}! Aqui é ${r.corretor||"a equipe"}, da Park Sul Imóveis.\n\nEsta é a sua ficha de ${I.quem}, com as informações necessárias para a elaboração do contrato de compra e venda${r.ref?` do imóvel ${r.ref}`:""}. Preencha os seus dados e anexe os documentos por este link:\n${url}\n\nOs documentos são obrigatórios. O link vale por ${LINK_DIAS} dias, até ${dt(r.expira).slice(0,10)}.`}
 function fichaLinkDialog(r,id){const I=FICHA_INFO[r.tipo||"vendedor"];const url=fichaUrl(r.t);const msg=fichaMsg(r,url);
   const tel=String(r.clienteTel||"").replace(/\D/g,"");const wa=`https://wa.me/${tel?(tel.length<=11?"55":"")+tel:""}?text=${encodeURIComponent(msg)}`;
   const env=(r.enviadoEmail||[]).map(x=>x.email);
@@ -1903,7 +1905,8 @@ function fichaLinkDialog(r,id){const I=FICHA_INFO[r.tipo||"vendedor"];const url=
    <label class="f">Mensagem para o cliente<textarea class="inp fmsg" id="flMsg" rows="7">${esc(msg)}</textarea></label>
    <div class="flenv"><label class="f">E-mail do cliente<input class="inp" id="flEmail" type="email" inputmode="email" value="${esc(r.clienteEmail||"")}" placeholder="cliente@email.com"></label><button class="btn pri" type="button" id="flEnviar">Enviar por e-mail</button></div>
    <p class="note" id="flOk" ${env.length?"":"hidden"}>✓ Enviado por e-mail para ${esc(env.join(", "))}</p><p class="err" id="flErr"></p>
-   <div class="placoes"><a class="btn sm wa" id="flWa" target="_blank" rel="noopener" href="${esc(wa)}">Enviar pelo WhatsApp${tel?"":"…"}</a><button class="btn sm" type="button" id="fvCp">Copiar link</button><button class="btn sm" type="button" id="fvCpm">Copiar mensagem</button><button class="btn sm ghost" type="button" id="fvVer">Ver como o ${esc(I.quem)} vê</button></div></div>
+   <a class="btn wa flwa" id="flWa" target="_blank" rel="noopener" href="${esc(wa)}">Enviar pelo WhatsApp do cliente${tel?` · ${esc(fmtTelFicha(tel))}`:""}</a>
+   <div class="placoes"><button class="btn sm" type="button" id="fvCp">Copiar link</button><button class="btn sm" type="button" id="fvCpm">Copiar mensagem</button><button class="btn sm ghost" type="button" id="fvVer">Ver como o ${esc(I.quem)} vê</button></div></div>
   <footer><button class="btn pri" data-close-btn>Pronto</button></footer>`},()=>{const txt=()=>$("#flMsg").value;
     $("#flMsg").oninput=()=>{$("#flWa").href=`https://wa.me/${tel?(tel.length<=11?"55":"")+tel:""}?text=${encodeURIComponent(txt())}`};
     $("#fvCp").onclick=()=>copiar(url,"Link copiado");$("#fvCpm").onclick=()=>copiar(txt(),"Mensagem copiada");$("#fvVer").onclick=()=>{closeModal();window.open(url,"_blank")};
@@ -1950,6 +1953,7 @@ document.addEventListener("click",async e=>{
   const ft=e.target.closest("[data-ftipo]");if(ft)S.fichaTipo=ft.dataset.ftipo;
   if(e.target.closest("#fvJunto")){$("#fvForm").hidden=false;$("#fvActs").hidden=false;$("#fvJunto").hidden=true;$("#fvForm").scrollIntoView({behavior:"smooth",block:"start"});return}
   if(e.target.closest("#fvLink")){const em=$("#fv_cmail").value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){$("#fvErr").textContent="Informe o seu e-mail para receber a ficha.";return}$("#fvErr").textContent="";
+    const ctel=$("#fv_ctel").value.replace(/\D/g,"");if(ctel.length<10||ctel.length>13){$("#fvErr").textContent="Informe o WhatsApp do cliente com DDD, para enviar o link.";$("#fv_ctel").focus();return}
     const ce=$("#fv_cemail").value.trim();if(ce&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ce)){$("#fvErr").textContent="E-mail do cliente inválido.";return}
     const b=e.target.closest("#fvLink");b.disabled=true;try{const r=await api("fichaLink",{tipo:S.fichaTipo||"vendedor",ref:$("#fv_ref").value.trim(),corrEmail:em,corretor:S.sessao?.nome||"",clienteNome:$("#fv_cnome").value.trim(),clienteEmail:ce,clienteTel:$("#fv_ctel").value.trim()});
       fichaGuardar(r.id,r.data);["#fv_ref","#fv_cnome","#fv_cemail","#fv_ctel"].forEach(x=>$(x).value="");fichaLinkDialog(r.data,r.id)}catch(er){$("#fvErr").textContent=er.message}finally{b.disabled=false}return}
@@ -3564,7 +3568,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-11-05-v84";
+const VERSAO_PAINEL="2026-11-05-v85";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
