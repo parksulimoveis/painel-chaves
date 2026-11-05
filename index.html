@@ -1044,7 +1044,7 @@ label.f .inp,label.f .sel{color:var(--fg);font-size:.9rem;width:100%}
       <button class="mtile" type="button" data-goto="aut"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 17c1.5-2 2.5-2 3.5 0s2 2 3.5 0"/></svg></span><span class="mk">Venda · proprietário</span><b>Autorização de venda</b><span class="md">Condições, link para o proprietário, assinatura e envio.</span></button>
       <button class="mtile" type="button" data-goto="fvend" data-ftipo="comprador"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M17 8h5M19.5 5.5v5"/></svg></span><span class="mk">Venda · comprador</span><b>Ficha do comprador</b><span class="md">Dados do promitente comprador para o contrato de compra e venda.</span></button>
       <button class="mtile" type="button" data-goto="fvend" data-ftipo="vendedor"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M15 12l2 2 4-4"/></svg></span><span class="mk">Venda · vendedor</span><b>Ficha do vendedor</b><span class="md">Dados do promitente vendedor para o contrato de compra e venda.</span></button>
-      <button class="mtile fpTile" type="button" data-goto="fpainel"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="mk">Contratos · acompanhamento</span><b>Painel de fichas</b><span class="md">Fichas recebidas por dia, documentos faltando e cobrança.</span></button>
+      <button class="mtile fpTile" type="button" data-goto="fpainel"><span class="mic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><span class="mk">Secretaria de Vendas</span><b>Painel de fichas</b><span class="md">Fichas recebidas por dia, documentos faltando e cobrança.</span></button>
     </div>
   </section>
   <section id="v-fvend" hidden>
@@ -1794,7 +1794,7 @@ async function autAssinarDialog(a,recId){
 
 /* ---------- Fichas de venda (vendedor e comprador) ----------
    Cada ficha é montada por uma lista de campos. Documentos ficam no fim; se faltar algum, a ficha vai assim mesmo
-   e o documento pode ser mandado depois pelo mesmo link (o Samuel cobra pelo Painel de fichas). */
+   e o documento pode ser mandado depois pelo mesmo link (a Secretaria de Vendas cobra pelo Painel de fichas). */
 const EC_FICHA=["Solteiro(a)","Casado(a)","União estável","Divorciado(a)","Viúvo(a)"];
 const REGIMES=["Comunhão parcial de bens","Comunhão universal de bens","Separação total de bens","Participação final nos aquestos","Separação obrigatória de bens"];
 function fichaSchema(tipo){const v=tipo==="vendedor",q=v?"vendedor":"comprador";
@@ -1867,7 +1867,7 @@ function prepFicha(){const tipo=S.fichaTipo||"vendedor",I=FICHA_INFO[tipo];$("#s
   if($("#fvForm").dataset.tipo!==tipo){$("#fvForm").innerHTML=fichaHtml(fichaSchema(tipo));$("#fvForm").dataset.tipo=tipo;if(!$("#fvForm").dataset.lig){fichaLigar($("#fvForm"));$("#fvForm").dataset.lig=1}
     $("#fvForm").hidden=true;$("#fvActs").hidden=true;$("#fvJunto").hidden=false;$("#fvErr").textContent=""}
   $("#fvIntro").textContent=I.intro;$("#fvLink").textContent=`Enviar para o ${I.quem} preencher`;$("#fvJunto").textContent=`Preencher junto com o ${I.quem} agora`;
-  $("#fvNota").textContent=`O ${I.quem} recebe um link (vale 10 dias), preenche os dados, anexa os documentos e envia. Você, o ${I.quem} e o Samuel (contratos) recebem a ficha em PDF.`;
+  $("#fvNota").textContent=`O ${I.quem} recebe um link (vale 10 dias), preenche os dados, anexa os documentos e envia. Você, o ${I.quem} e a Secretaria de Vendas recebem a ficha em PDF.`;
   const eu=S.sessao?.nome||"";const c=[...(S.contatos||new Map()).values()].find(x=>semAcento(x.nome)===semAcento(eu));
   if(c?.email&&!$("#fv_cmail").value)$("#fv_cmail").value=c.email;
   renderFichaLista()}
@@ -1921,7 +1921,7 @@ ${r.ref?`<div class="bx"><div class="bt">Imóvel</div><div class="g2"><div class
 <p class="rod">Corretor responsável: ${E(r.corretor||"—")} · Recebida em ${E(dt(r.recebidaEm||r.criadoEm))} · Park Sul Imóveis</p></div></body></html>`}
 function abrirFichaDoc(r){const w=window.open("","_blank");if(!w){toast("Permita pop-ups para este site.");return}w.document.open();w.document.write(fichaDoc(r));w.document.close()}
 function fichaGuardar(id,data){(DATA.fichas||(DATA.fichas=new Map())).set(id,{...(DATA.fichas?.get(id)||{}),...data});avisar(new Set(["fichas"]))}
-// cobrar ou anexar documento que faltou (corretor, Samuel e master)
+// cobrar ou anexar documento que faltou (corretor, Secretaria de Vendas e master)
 function fichaCobrarDialog(id){const r=S.fichas?.get(id);if(!r)return;const I=FICHA_INFO[r.tipo||"vendedor"];const falta=fichaFaltaRec(r);const d=r.dados||{};
   const pn=String(d.nome||"").split(" ")[0];const url=r.t?fichaUrl(r.t):"";
   const msg=`Olá, ${pn}! Aqui é da Park Sul Imóveis. Para seguirmos com o contrato de compra e venda${r.ref?` (${r.ref})`:""}, ainda falta${falta.length>1?"m":""}: ${falta.map(f=>f.l).join(", ")}.${url?` Pode enviar por este link: ${url}`:" Pode responder esta mensagem com o documento."} Obrigado!`;
@@ -1936,7 +1936,7 @@ function fichaCobrarDialog(id){const r=S.fichas?.get(id);if(!r)return;const I=FI
     if($("#fcAx"))$("#fcAx").onclick=async()=>{const fs=[...($("#fc_f").files||[])].slice(0,5);if(!fs.length){$("#fcErr").textContent="Escolha o arquivo.";return}
       const b=$("#fcAx");b.disabled=true;b.textContent="Enviando…";
       try{const k=$("#fc_k").value;const anexos=await fichaAnexos(fs.map(file=>({campo:k,file})));const res=await api("fichaAnexarSis",{id,anexos});
-        fichaGuardar(id,{anexos:res.anexos,faltando:res.faltando});closeModal();toast("Documento anexado e enviado ao Samuel");if(!$("#v-fpainel").hidden)renderFPainel()}
+        fichaGuardar(id,{anexos:res.anexos,faltando:res.faltando});closeModal();toast("Documento anexado e enviado à Secretaria de Vendas");if(!$("#v-fpainel").hidden)renderFPainel()}
       catch(e){$("#fcErr").textContent=e.message;b.disabled=false;b.textContent="Anexar documento"}}})}
 document.addEventListener("click",async e=>{
   const ft=e.target.closest("[data-ftipo]");if(ft)S.fichaTipo=ft.dataset.ftipo;
@@ -1953,8 +1953,8 @@ document.addEventListener("click",async e=>{
     const tipo=S.fichaTipo||"vendedor",ref=$("#fv_ref").value.trim(),corretor=S.sessao?.nome||"";
     await fichaSubmeter({tipo,root:$("#fvForm"),btn:$("#fvEnviar"),lbl:"Salvar e enviar a ficha",err:$("#fvErr"),acao:"fichaSalvar",ref,corretor,payload:{ref,corrEmail:em,corretor},
       ok:(res,rec,r)=>{fichaGuardar(res.id,res.data||{...rec,corrEmail:em,status:"recebida",criadoEm:nowISO(),por:S.sessao?.id,faltando:r.falta});
-        toast("Ficha enviada ao corretor, ao "+FICHA_INFO[tipo].quem+" e ao Samuel");$("#fvForm").dataset.tipo="";$("#fv_ref").value="";prepFicha()}})}});
-// ---- Painel de fichas (Samuel e master)
+        toast("Ficha enviada ao corretor, ao "+FICHA_INFO[tipo].quem+" e à Secretaria de Vendas");$("#fvForm").dataset.tipo="";$("#fv_ref").value="";prepFicha()}})}});
+// ---- Painel de fichas (Secretaria de Vendas e master)
 const podePainelFichas=()=>!!(S.full||S.sessao?.fichas);
 function renderFPainel(){const el=$("#fpBox");if(!el)return;if(!podePainelFichas()){el.innerHTML=`<p class="note">Sem acesso.</p>`;return}
   const F=S.fp||(S.fp={per:30,tipo:"",sit:"",q:""});const dia=86400000,hoje0=new Date();hoje0.setHours(0,0,0,0);
@@ -1978,7 +1978,7 @@ function renderFPainel(){const el=$("#fpBox");if(!el)return;if(!podePainelFichas
       <select class="sel" id="fp_tipo"><option value="">Todas as fichas</option><option value="autorizacao" ${F.tipo==="autorizacao"?"selected":""}>Autorizações de venda</option><option value="vendedor" ${F.tipo==="vendedor"?"selected":""}>Fichas do vendedor</option><option value="comprador" ${F.tipo==="comprador"?"selected":""}>Fichas do comprador</option></select>
       <select class="sel" id="fp_sit"><option value="">Todas as situações</option><option value="pend" ${F.sit==="pend"?"selected":""}>Faltam documentos</option><option value="ok" ${F.sit==="ok"?"selected":""}>Completas</option><option value="agu" ${F.sit==="agu"?"selected":""}>Aguardando preenchimento</option></select>
       <select class="sel" id="fp_per">${[[7,"Últimos 7 dias"],[30,"Últimos 30 dias"],[90,"Últimos 90 dias"],[0,"Todo o período"]].map(([v,t])=>`<option value="${v}" ${F.per===v?"selected":""}>${t}</option>`).join("")}</select></div>
-      <button class="btn" type="button" id="fpPlan">Abrir planilha no Sheets</button></div>
+      <button class="btn pri" type="button" id="fpPlan">Abrir planilha no Google Sheets</button></div>
     <div class="fpkpi"><div><span>Fichas recebidas</span><b>${recPer.length}</b><small>${F.per?`últimos ${F.per} dias`:"todo o período"}</small></div><div><span>Hoje</span><b>${hoje}</b><small>recebidas hoje</small></div>
       <div class="${pend.length?"al":""}"><span>Faltam documentos</span><b>${pend.length}</b><small>para cobrar</small></div><div><span>Aguardando</span><b>${agu.length}</b><small>link enviado, não preenchido</small></div></div>
     <div class="fpchart"><h3>Fichas recebidas por dia</h3><div class="fpbars" style="--n:${dias.length}">${dias.map((x,i)=>`<div class="fpb" title="${x.d.toLocaleDateString("pt-BR")}: ${x.n} ficha(s)"><em>${x.n||""}</em><i style="height:${x.n?Math.max(6,x.n/mx*100):0}%"></i><small>${i%(nd>14?5:1)===0||i===dias.length-1?x.d.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}):""}</small></div>`).join("")}</div></div>
@@ -2250,7 +2250,7 @@ function renderCorr(){
   const list=[...S.corr.entries()].filter(([,c])=>inat||c.ativo!==false).sort((a,b)=>cmp(a[1].nome,b[1].nome));
   $("#btnPin").hidden=!S.admin||SEM_SENHAS;$("#btnPinSt").hidden=!S.admin||SEM_SENHAS;
   if(!list.length){$("#corrBox").innerHTML=`<div class="empty"><b>Nenhum corretor na lista</b>Inclua os nomes para usar nas retiradas e como captador.</div>`;return}
-  $("#corrBox").innerHTML=`<p class="count">${[...S.corr.values()].filter(c=>c.ativo!==false).length} pessoas ativas (diretoria, corretores e colaboradores)</p><div class="tblwrap"><table><thead><tr><th>Nome</th><th>Usuário</th><th>Função</th><th>Acesso</th><th>Captador</th><th>Chaves em mãos</th><th>Retiradas registradas</th><th>Última retirada</th><th>Situação</th><th></th></tr></thead><tbody>${list.map(([id,c])=>`<tr><td><b>${esc(c.nome)}</b></td><td><code>${esc(S.acessos.get(id)?.usuario||usuarioDe(c))}</code></td><td>${esc(TIPO_LBL[c.tipo||"corretor"])}</td><td><span class="nivtag nv-${nivelDe(c)}">${NIVEL_LBL[nivelDe(c)]}</span>${c.contratos?` <span class="nivtag nv-fichas">Fichas</span>`:""}</td><td>${S.canWrite?`<button class="btn sm ${c.captador?"capon":""}" data-act="toggleCapt" data-id="${esc(id)}" title="${c.captador?"Tirar da lista de captadores":"Incluir na lista de captadores"}">${c.captador?"✓ Captador":"—"}</button>`:(c.captador?"Sim":"—")}</td><td>${em[c.nome]||0}</td><td>${tot[c.nome]||0}</td><td>${ult[c.nome]?esc(dt(ult[c.nome])):"—"}</td><td>${c.ativo===false?'<span class="pill" style="--c:var(--st-indi)">Saiu</span>':'<span class="pill" style="--c:var(--st-disp)">Ativo</span>'}</td><td>${S.canWrite?`<div class="acts"><button class="btn sm ghost" data-act="renCorr" data-id="${esc(id)}">Editar</button><button class="btn sm" data-act="toggleCorr" data-id="${esc(id)}">${c.ativo===false?"Reativar":"Retirar da lista"}</button></div>`:""}</td></tr>`).join("")}</tbody></table></div>`;
+  $("#corrBox").innerHTML=`<p class="count">${[...S.corr.values()].filter(c=>c.ativo!==false).length} pessoas ativas (diretoria, corretores e colaboradores)</p><div class="tblwrap"><table><thead><tr><th>Nome</th><th>Usuário</th><th>Função</th><th>Acesso</th><th>Captador</th><th>Chaves em mãos</th><th>Retiradas registradas</th><th>Última retirada</th><th>Situação</th><th></th></tr></thead><tbody>${list.map(([id,c])=>`<tr><td><b>${esc(c.nome)}</b></td><td><code>${esc(S.acessos.get(id)?.usuario||usuarioDe(c))}</code></td><td>${esc(TIPO_LBL[c.tipo||"corretor"])}</td><td><span class="nivtag nv-${nivelDe(c)}">${NIVEL_LBL[nivelDe(c)]}</span>${c.contratos?` <span class="nivtag nv-fichas">Secretaria de Vendas</span>`:""}</td><td>${S.canWrite?`<button class="btn sm ${c.captador?"capon":""}" data-act="toggleCapt" data-id="${esc(id)}" title="${c.captador?"Tirar da lista de captadores":"Incluir na lista de captadores"}">${c.captador?"✓ Captador":"—"}</button>`:(c.captador?"Sim":"—")}</td><td>${em[c.nome]||0}</td><td>${tot[c.nome]||0}</td><td>${ult[c.nome]?esc(dt(ult[c.nome])):"—"}</td><td>${c.ativo===false?'<span class="pill" style="--c:var(--st-indi)">Saiu</span>':'<span class="pill" style="--c:var(--st-disp)">Ativo</span>'}</td><td>${S.canWrite?`<div class="acts"><button class="btn sm ghost" data-act="renCorr" data-id="${esc(id)}">Editar</button><button class="btn sm" data-act="toggleCorr" data-id="${esc(id)}">${c.ativo===false?"Reativar":"Retirar da lista"}</button></div>`:""}</td></tr>`).join("")}</tbody></table></div>`;
 }
 function renomearCorr(id){
   const c=S.corr.get(id);
@@ -2258,12 +2258,12 @@ function renomearCorr(id){
   <div class="bd"><label class="f">Nome e sobrenome<input class="inp" id="rn_nome" value="${esc(c.nome)}"></label>
   <label class="f">Função<select class="sel" id="rn_tipo">${TIPO_OPTS.map(([k,v])=>`<option value="${k}" ${(c.tipo||"corretor")===k?"selected":""}>${v}</option>`).join("")}</select></label>
   <label class="f">Acesso ao sistema<select class="sel" id="rn_nivel">${Object.entries(NIVEL_LBL).map(([k,v])=>`<option value="${k}" ${nivelDe(c)===k?"selected":""}>${v}</option>`).join("")}</select></label>
-  <label class="chkl"><input type="checkbox" id="rn_contr" ${c.contratos?"checked":""}> Acesso ao Painel de fichas de venda (contratos)</label>
+  <label class="chkl"><input type="checkbox" id="rn_contr" ${c.contratos?"checked":""}> Secretaria de Vendas (acesso ao Painel de fichas e à planilha)</label>
   <p class="note" style="margin:0"><b>Master</b>: tudo, inclusive indicadores e gestão. <b>Colaborador</b>: área do corretor, operação e contratos. <b>Corretor</b>: só a área do corretor.</p><p class="note">O nome também é atualizado nos imóveis em que ele é captador, nas chaves que estão com ele e no histórico de retiradas.</p><p class="err" id="rnErr"></p></div>
   <footer><button class="btn" data-close-btn>Cancelar</button><button class="btn pri" id="rnOk">Salvar</button></footer>`},()=>{
     $("#rnOk").onclick=async()=>{const novo=nomePessoa($("#rn_nome").value);const velho=c.nome;const tipo=$("#rn_tipo").value;const acesso=$("#rn_nivel").value;
       if(!novo){$("#rnErr").textContent="Informe o nome.";return}
-      const contr=$("#rn_contr").checked;if(contr!==!!c.contratos){try{await db.doc("corretores/"+id).update({contratos:contr});logEv("corretor_nome",{corretor:c.nome,detalhe:"Painel de fichas: "+(contr?"liberado":"retirado")})}catch(e){$("#rnErr").textContent=writeErr(e);return}}
+      const contr=$("#rn_contr").checked;if(contr!==!!c.contratos){try{await db.doc("corretores/"+id).update({contratos:contr});logEv("corretor_nome",{corretor:c.nome,detalhe:"Secretaria de Vendas: "+(contr?"liberado":"retirado")})}catch(e){$("#rnErr").textContent=writeErr(e);return}}
       if(acesso!==nivelDe(c)){try{await db.doc("corretores/"+id).update({acesso});logEv("corretor_nome",{corretor:c.nome,detalhe:"Acesso: "+NIVEL_LBL[acesso]})}catch(e){$("#rnErr").textContent=writeErr(e);return}}
       if(novo===velho){if(tipo!==(c.tipo||"corretor")){try{await db.doc("corretores/"+id).update({tipo});logEv("corretor_nome",{corretor:novo,detalhe:"Tipo: "+TIPO_LBL[tipo]});closeModal();toast("Cadastro atualizado")}catch(e){$("#rnErr").textContent=writeErr(e)}}else closeModal();return}
       if(corrList(true).some(x=>x.toLowerCase()===novo.toLowerCase())){$("#rnErr").textContent="Já existe um corretor com esse nome.";return}
@@ -3556,7 +3556,7 @@ setInterval(()=>{if(S.ready&&!$("#modal").innerHTML)renderAll()},60000);
 
 /* ---------- Conexão (Google Apps Script + planilha) ---------- */
 // Atualização automática: se houver versão nova do painel no GitHub, recarrega sozinho
-const VERSAO_PAINEL="2026-11-05-v82";
+const VERSAO_PAINEL="2026-11-05-v83";
 async function checarVersao(){try{if(pendente&&pendente())return;const t=await fetch(location.pathname+"?v="+Date.now(),{cache:"no-store"}).then(r=>r.text());const m=t.match(/VERSAO_PAINEL="([^"]+)"/);if(m&&m[1]!==VERSAO_PAINEL){toast("Atualizando para a nova versão do painel…");setTimeout(()=>location.reload(),1200)}}catch{}}
 setInterval(checarVersao,5*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checarVersao()});
 const API_URL="https://script.google.com/macros/s/AKfycbzkzXeDJUB698vFuUBdLUteSaUWGOmOjsy98-JzSHgwz5LKTXdpw1RnzjEMQWJlP-cjlw/exec";   // endereço do App da Web (termina em /exec)
